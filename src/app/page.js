@@ -1,31 +1,57 @@
-"use client";
-import { useAdminGetSession, useAdminLogin } from "medusa-react";
-export default function Home() {
-  const { data, isLoading } = useAdminGetSession();
-  const adminLogin = useAdminLogin();
+'use client';
+import { getToken } from '@/lib/data';
+import {
+    useAdminGetSession,
+    useAdminLogin,
+    useAdminUploadFile,
+} from 'medusa-react';
+import { getAuth } from '@/store/auth-store';
 
-  const handleLogin = () => {
-    adminLogin.mutate(
-      {
-        email: "dmbi@gmail.com",
-        password: "12345",
-      },
-      {
-        onSuccess: ({ user }) => {
-          console.log(user);
-        },
-      },
+export default function Home() {
+    const uploadFile = useAdminUploadFile();
+    const adminLogin = useAdminLogin();
+    const { setToken } = getAuth();
+
+    const handleLogin = (email, password) => {
+        adminLogin.mutate(
+            {
+                email,
+                password,
+            },
+            {
+                onSuccess: async ({ user }) => {
+                    console.log(user);
+                    const token = await getToken(email, password);
+                    setToken(token);
+                },
+            }
+        );
+    };
+
+    const handleFileUpload = (file) => {
+        uploadFile.mutate(file, {
+            onSuccess: ({ uploads }) => {
+                console.log(uploads[0]);
+            },
+        });
+    };
+
+    return (
+        <div>
+            <input
+                type="file"
+                onChange={(e) => {
+                    handleFileUpload(e.target.files[0]);
+                }}
+            />
+
+            <button
+                onClick={() => {
+                    handleLogin('dmbi@gmail.com', '12345');
+                }}
+            >
+                Click
+            </button>
+        </div>
     );
-  };
-  return (
-    <div>
-      <button
-        onClick={() => {
-          handleLogin();
-        }}
-      >
-        Click
-      </button>
-    </div>
-  );
 }
