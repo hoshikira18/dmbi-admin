@@ -33,12 +33,10 @@ const LoginCard = () => {
             {
                 onSuccess: () => {
                     setError(false);
+                    router.push('/');
                 },
                 onError: (error) => {
                     setError(true);
-                },
-                onSettled: () => {
-                    router.push('/');
                 },
             }
         );
