@@ -54,7 +54,6 @@ const LoginCard = () => {
             <CardContent>
                 <Form {...form}>
                     <form
-                        method="POST"
                         onSubmit={form.handleSubmit((data) => {
                             handleLogin(data.username, data.password);
                         })}
