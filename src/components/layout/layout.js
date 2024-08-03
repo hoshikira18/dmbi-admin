@@ -40,7 +40,7 @@ import {
 } from 'medusa-react';
 import { useRouter } from 'next/navigation';
 
-function Dashboard({ children }) {
+function Layout({ children }) {
     const router = useRouter();
     const { user, isLoading } = useAdminGetSession();
     const adminLogout = useAdminDeleteSession();
@@ -184,4 +184,4 @@ function Dashboard({ children }) {
     );
 }
 
-export default Dashboard;
+export default Layout;

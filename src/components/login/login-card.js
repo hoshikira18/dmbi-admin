@@ -11,6 +11,7 @@ import {
 } from '../ui/form';
 import { set, useForm } from 'react-hook-form';
 import { useAdminLogin } from 'medusa-react';
+import { useAdminGetSession } from 'medusa-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -24,6 +25,8 @@ const LoginCard = () => {
         },
     });
     const adminLogin = useAdminLogin();
+    const { user, isLoading } = useAdminGetSession();
+
     const handleLogin = (email, password) => {
         adminLogin.mutate(
             {
@@ -32,11 +35,13 @@ const LoginCard = () => {
             },
             {
                 onSuccess: () => {
-                    setError(false);
-                    router.push('/');
+                    // setError(false);
+                    console.log('login success');
+                    // router.push('/');
                 },
                 onError: (error) => {
-                    setError(true);
+                    console.log('login error', error);
+                    // setError(true);
                 },
             }
         );
@@ -101,6 +106,14 @@ const LoginCard = () => {
                         </button>
                     </form>
                 </Form>
+                <button
+                    className="btn btn-primary"
+                    onClick={() => {
+                        console.log(user);
+                    }}
+                >
+                    Click
+                </button>
             </CardContent>
         </Card>
     );
