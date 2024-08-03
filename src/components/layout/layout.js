@@ -51,7 +51,7 @@ function Dashboard({ children }) {
     const handleLogout = () => {
         adminLogout.mutate(undefined, {
             onSuccess: () => {
-                navigate('/login');
+                router.push('/login');
             },
         });
     };

@@ -32,15 +32,12 @@ const LoginCard = () => {
             },
             {
                 onSuccess: () => {
-                    console.log('Login successful');
                     setError(false);
                 },
                 onError: (error) => {
-                    console.log('Login failed', error);
                     setError(true);
                 },
                 onSettled: () => {
-                    console.log('Login completed');
                     router.push('/');
                 },
             }

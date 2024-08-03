@@ -24,7 +24,7 @@ const DialogComponent = ({
     return (
         <Dialog>
             <DialogTrigger asChild>{triggerButton}</DialogTrigger>
-            <DialogContent className={`${dialogSize[size]}`}>
+            <DialogContent className={`max-h-screen ${dialogSize[size]}`}>
                 <DialogHeader>
                     <DialogTitle>{title}</DialogTitle>
                     <DialogDescription>{description}</DialogDescription>

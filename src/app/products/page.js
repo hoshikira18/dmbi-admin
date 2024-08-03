@@ -1,10 +1,11 @@
 import TokenDisplay from '@/components/common/token';
+import { Layout } from '@/components/layout';
 import React from 'react';
 const Products = () => {
     return (
-        <div>
+        <Layout>
             <TokenDisplay />
-        </div>
+        </Layout>
     );
 };
 

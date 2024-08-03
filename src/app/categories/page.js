@@ -1,6 +1,7 @@
 'use client';
 import NewCategory from '@/components/category/new-category';
 import DialogComponent from '@/components/common/dialog';
+import { Layout } from '@/components/layout';
 import { useAdminProductCategories } from 'medusa-react';
 
 const Categories = () => {
@@ -8,7 +9,7 @@ const Categories = () => {
     console.log(product_categories);
 
     return (
-        <div>
+        <Layout>
             <h1>Categories</h1>
             <DialogComponent
                 title="Tạo mới danh mục"
@@ -21,7 +22,7 @@ const Categories = () => {
             >
                 <NewCategory />
             </DialogComponent>
-        </div>
+        </Layout>
     );
 };
 
