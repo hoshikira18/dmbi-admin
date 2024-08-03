@@ -15,9 +15,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className={inter.className}>
-                <Layout>
-                    <MedusaClient>{children}</MedusaClient>
-                </Layout>
+                <MedusaClient>{children}</MedusaClient>
             </body>
         </html>
     );

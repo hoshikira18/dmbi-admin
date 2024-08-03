@@ -33,8 +33,28 @@ import {
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Navigation from '../common/navigation';
+import {
+    useAdminDeleteSession,
+    useAdminGetSession,
+    useAdminUser,
+} from 'medusa-react';
+import { useRouter } from 'next/navigation';
 
 function Dashboard({ children }) {
+    const router = useRouter();
+    const { user, isLoading } = useAdminGetSession();
+    const adminLogout = useAdminDeleteSession();
+    if (!isLoading && !user) {
+        window.location.href = '/login';
+    }
+
+    const handleLogout = () => {
+        adminLogout.mutate(undefined, {
+            onSuccess: () => {
+                navigate('/login');
+            },
+        });
+    };
     return (
         <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
             <div className="hidden border-r bg-muted/40 md:block">
@@ -146,7 +166,13 @@ function Dashboard({ children }) {
                             <DropdownMenuItem>Settings</DropdownMenuItem>
                             <DropdownMenuItem>Support</DropdownMenuItem>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem>Logout</DropdownMenuItem>
+                            <DropdownMenuItem
+                                onClick={() => {
+                                    handleLogout();
+                                }}
+                            >
+                                Logout
+                            </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </header>

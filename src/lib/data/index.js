@@ -11,3 +11,10 @@ export const getToken = async (email, password) => {
         });
     return access_token;
 };
+
+export const getUser = async () => {
+    const user = medusaClient.admin.auth.getSession().then(({ data }) => {
+        return data;
+    });
+    return user;
+};
