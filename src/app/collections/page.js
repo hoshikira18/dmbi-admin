@@ -16,7 +16,7 @@ const CollectionsPage = () => {
                         Bộ sưu tập mới
                     </button>
                 }
-                size="lg"
+                size="md"
             >
                 <NewCollectionCard />
             </DialogComponent>

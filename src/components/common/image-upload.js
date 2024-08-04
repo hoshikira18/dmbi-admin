@@ -20,7 +20,7 @@ const ImageUpload = ({ multiple = false, files, setFiles }) => {
     };
 
     return (
-        <div className="max-h-[500px] space-y-4 overflow-scroll">
+        <div className="space-y-4">
             <FormField
                 name={`image${multiple ? 's' : ''}`}
                 render={({ field }) => (
