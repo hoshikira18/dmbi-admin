@@ -21,7 +21,6 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const CategoriesTemplate = () => {
-    window.title = 'Categories';
     const { product_categories, isLoading } = useAdminProductCategories();
 
     return (
