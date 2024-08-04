@@ -1,7 +1,17 @@
+import { set } from 'react-hook-form';
 import { FormField, FormItem } from '../ui/form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 const ImageUpload = ({ multiple = false, files, setFiles }) => {
     const [preview, setPreview] = useState([]);
+
+    useEffect(() => {
+        if (files) {
+            setPreview(files.map((file) => URL.createObjectURL(file)));
+        }
+        return () => {
+            setPreview(['']);
+        };
+    }, [files]);
 
     const handleUpload = (e) => {
         const files = Array.from(e.target.files);
@@ -30,15 +40,16 @@ const ImageUpload = ({ multiple = false, files, setFiles }) => {
                 )}
             />
             <div className="flex flex-wrap gap-4">
-                {preview.map((image) => (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                        key={image}
-                        src={image}
-                        alt="Preview"
-                        className="w-full rounded-lg border border-gray-300 object-cover"
-                    />
-                ))}
+                {files &&
+                    preview.map((image) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                            key={image}
+                            src={image}
+                            alt="Preview"
+                            className="w-full rounded-lg border border-gray-300 object-cover"
+                        />
+                    ))}
             </div>
         </div>
     );

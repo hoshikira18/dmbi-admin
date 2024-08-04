@@ -2,6 +2,7 @@ import { clsx } from 'clsx';
 import { formatAmount } from 'medusa-react';
 import { twMerge } from 'tailwind-merge';
 import { medusaClient } from './config';
+import { useToast } from '@/components/ui/use-toast';
 
 export function cn(...inputs) {
     return twMerge(clsx(inputs));

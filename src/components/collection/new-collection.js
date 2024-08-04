@@ -1,43 +1,51 @@
-'use client';
-import { useAdminCreateProductCategory } from 'medusa-react';
+import { useAdminCreateCollection } from 'medusa-react';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import { useToast } from '../ui/use-toast';
 import { Form, FormField, FormItem } from '../ui/form';
 import { Input } from '../ui/input';
 import ImageUpload from '../common/image-upload';
 import { uploadFile } from '@/lib/utils';
-import { useToast } from '../ui/use-toast';
-const NewCategory = () => {
+
+const NewCollectionCard = () => {
     const { toast } = useToast();
-    const createCategory = useAdminCreateProductCategory();
+    const createCollection = useAdminCreateCollection();
 
     const form = useForm({
         defaultValues: {
-            name: '',
+            title: '',
             handle: '',
             image: '',
         },
     });
+
     const [files, setFiles] = useState([]);
-    const handleCreateCategory = (name, handle, image) => {
-        createCategory.mutate(
+
+    const handleCreateCollection = (title, handle, image) => {
+        createCollection.mutate(
             {
-                name,
+                title,
                 handle,
-                is_active: true,
                 metadata: {
                     image: image,
                 },
             },
             {
-                onSuccess: ({ product_category }) => {
-                    console.log(product_category);
+                onSuccess: ({ collection }) => {
+                    console.log(collection);
                     toast({
-                        title: 'Tạo mới danh mục thành công',
-                        description: `Danh mục ${product_category.name} đã được tạo`,
+                        title: 'Tạo mới bộ sưu tập thành công',
+                        description: `Bộ sưu tập ${collection.title} đã được tạo`,
                     });
                     form.reset();
                     setFiles([]);
+                },
+                onError: (error) => {
+                    console.log('error', error);
+                    toast({
+                        title: 'Đã có lỗi xảy ra',
+                        description: 'Vui lòng thử lại',
+                    });
                 },
             }
         );
@@ -53,11 +61,13 @@ const NewCategory = () => {
                             name="category-name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <label htmlFor="name">Tên danh mục</label>
+                                    <label htmlFor="title">
+                                        Tên bộ sưu tập
+                                    </label>
                                     <Input
-                                        id="category-name"
-                                        placeholder="Danh mục mới"
-                                        {...form.register('category-name', {
+                                        id="collection-title"
+                                        placeholder="Bộ sưu tập mới"
+                                        {...form.register('title', {
                                             required: true,
                                         })}
                                     />
@@ -73,7 +83,7 @@ const NewCategory = () => {
                                     <label htmlFor="handle">Đường dẫn</label>
                                     <Input
                                         id="handle"
-                                        placeholder="danh-muc-moi"
+                                        placeholder="bo-suu-tap-moi"
                                         {...form.register('handle', {
                                             required: true,
                                         })}
@@ -86,8 +96,8 @@ const NewCategory = () => {
                     <button
                         onClick={form.handleSubmit(async (data) => {
                             await uploadFile(files[0]).then((url) => {
-                                handleCreateCategory(
-                                    data['category-name'],
+                                handleCreateCollection(
+                                    data['title'],
                                     data['handle'],
                                     url
                                 );
@@ -95,7 +105,7 @@ const NewCategory = () => {
                         })}
                         className="btn btn-primary w-full"
                     >
-                        Tạo danh mục
+                        Tạo bộ sưu tập
                     </button>
                 </form>
             </Form>
@@ -103,4 +113,4 @@ const NewCategory = () => {
     );
 };
 
-export default NewCategory;
+export default NewCollectionCard;
