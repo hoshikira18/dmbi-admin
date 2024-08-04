@@ -1,8 +1,6 @@
 import { clsx } from 'clsx';
-import { formatAmount } from 'medusa-react';
 import { twMerge } from 'tailwind-merge';
 import { medusaClient } from './config';
-import { useToast } from '@/components/ui/use-toast';
 
 export function cn(...inputs) {
     return twMerge(clsx(inputs));
@@ -24,4 +22,13 @@ export const uploadFiles = async (files) => {
             return await uploadFile(file);
         })
     );
+};
+
+export const formatDate = (date) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(date).toLocaleDateString('VI', options);
+};
+
+export const formatNumber = (number) => {
+    return new Intl.NumberFormat().format(number);
 };
