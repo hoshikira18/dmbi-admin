@@ -1,6 +1,6 @@
 'use client';
 import { useAdminCreateProductCategory } from 'medusa-react';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { Form, FormField, FormItem } from '../ui/form';
 import { Input } from '../ui/input';
@@ -10,6 +10,7 @@ import { useToast } from '../ui/use-toast';
 const NewCategory = () => {
     const { toast } = useToast();
     const createCategory = useAdminCreateProductCategory();
+    const [isLoading, setIsLoading] = useState(false);
 
     const form = useForm({
         defaultValues: {
@@ -36,6 +37,7 @@ const NewCategory = () => {
                         title: 'Tạo mới danh mục thành công',
                         description: `Danh mục ${product_category.name} đã được tạo`,
                     });
+                    setIsLoading(false);
                     form.reset();
                     setFiles([]);
                 },
@@ -44,7 +46,7 @@ const NewCategory = () => {
     };
 
     return (
-        <div>
+        <div className="relative">
             <Form {...form}>
                 <form className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
@@ -85,6 +87,7 @@ const NewCategory = () => {
                     <ImageUpload files={files} setFiles={setFiles} />
                     <button
                         onClick={form.handleSubmit(async (data) => {
+                            setIsLoading(true);
                             await uploadFile(files[0]).then((url) => {
                                 handleCreateCategory(
                                     data['category-name'],
@@ -95,6 +98,9 @@ const NewCategory = () => {
                         })}
                         className="btn btn-primary w-full"
                     >
+                        {isLoading && (
+                            <span className="loading loading-spinner"></span>
+                        )}
                         Tạo danh mục
                     </button>
                 </form>
