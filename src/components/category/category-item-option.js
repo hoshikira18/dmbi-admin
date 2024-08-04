@@ -15,8 +15,9 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import Link from 'next/link'
 
-const CategoryItemOptions = () => {
+const CategoryItemOptions = ({id}) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -25,7 +26,7 @@ const CategoryItemOptions = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="">
-      <DropdownMenuItem>Chi tiết</DropdownMenuItem>
+      <DropdownMenuItem><Link href={`/categories/${id}`}>Chi tiết</Link></DropdownMenuItem>
       <DropdownMenuItem>Xóa</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

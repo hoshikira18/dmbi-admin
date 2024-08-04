@@ -56,14 +56,14 @@ const Categories = () => {
                 <TableBody>
                     {product_categories?.map((category, index) => (
                             
-                            <TableRow key={category.handle} href="{`/categories/${category.id}`}">
-                                <TableCell><Link href={`/categories/${category.id}`} key={category.id}>{index+1}</Link></TableCell>
+                            <TableRow key={category.handle}>
+                                <TableCell><Link href={`/categories/${category.id}`} key={category.id}><p>{index+1}</p></Link></TableCell>
                                 <TableCell className="max-w-[150px] truncate"><Link href={`/categories/${category.id}`} key={category.id}>{category.id}</Link></TableCell>
                                 <TableCell className="pl-[40px]"><Link href={`/categories/${category.id}`} key={category.id}>{category.name}</Link></TableCell>
                                 <TableCell>{category.handle}</TableCell>
                                 <TableCell>{formatDate(category.created_at)}</TableCell>
                                 <TableCell>
-                                    <CategoryItemOptions/>
+                                    <CategoryItemOptions id={category.id}/>
                                 </TableCell>
                             </TableRow>
                     ))}
