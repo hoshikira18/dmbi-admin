@@ -1,5 +1,4 @@
 import { clsx } from 'clsx';
-import { formatAmount } from 'medusa-react';
 import { twMerge } from 'tailwind-merge';
 import { medusaClient } from './config';
 
