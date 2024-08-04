@@ -3,10 +3,28 @@ import NewCategory from '@/components/category/new-category';
 import DialogComponent from '@/components/common/dialog';
 import { Layout } from '@/components/layout';
 import { useAdminProductCategories } from 'medusa-react';
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableFooter,
+    TableHead,
+    TableHeader,
+    TableRow,
+  } from "@/components/ui/table"
+import { handler } from 'tailwindcss-animate';
+import { formatDate } from '@/lib/utils';
+import { Ellipsis } from 'lucide-react';
+import CategoryItemOptions from '@/components/category/category-item-option';
+import Link from 'next/link';
 
 const Categories = () => {
     const { product_categories, isLoading } = useAdminProductCategories();
     console.log(product_categories);
+    // product_categories.map((category, index) => {
+    //     console.log(category)
+    // })
 
     return (
         <Layout>
@@ -22,6 +40,39 @@ const Categories = () => {
             >
                 <NewCategory />
             </DialogComponent>
+            
+            {
+            <Table>
+                <TableCaption>Test</TableCaption>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="w-[80px]">STT</TableHead>
+                        <TableHead className="w-[150px]">ID</TableHead>
+                        <TableHead className="pl-[40px]">CategoryName</TableHead>
+                        <TableHead>Handle</TableHead>
+                        <TableHead>CreateAt</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {product_categories?.map((category, index) => (
+                            
+                            <TableRow key={category.handle} href="{`/categories/${category.id}`}">
+                                <TableCell><Link href={`/categories/${category.id}`} key={category.id}>{index+1}</Link></TableCell>
+                                <TableCell className="max-w-[150px] truncate"><Link href={`/categories/${category.id}`} key={category.id}>{category.id}</Link></TableCell>
+                                <TableCell className="pl-[40px]"><Link href={`/categories/${category.id}`} key={category.id}>{category.name}</Link></TableCell>
+                                <TableCell>{category.handle}</TableCell>
+                                <TableCell>{formatDate(category.created_at)}</TableCell>
+                                <TableCell>
+                                    <CategoryItemOptions/>
+                                </TableCell>
+                            </TableRow>
+                    ))}
+                </TableBody>
+                <TableFooter>
+
+                </TableFooter>
+            </Table>
+            }
         </Layout>
     );
 };
