@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
 import MedusaClient from '@/components/common/MedusaClient';
-import { Layout } from '@/components/layout';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,7 +15,10 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className={inter.className}>
-                <MedusaClient>{children}</MedusaClient>
+                <MedusaClient>
+                    <Toaster />
+                    {children}
+                </MedusaClient>
             </body>
         </html>
     );

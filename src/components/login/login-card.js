@@ -14,9 +14,11 @@ import { useAdminLogin } from 'medusa-react';
 import { useAdminGetSession } from 'medusa-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useToast } from '../ui/use-toast';
 
 const LoginCard = () => {
     const router = useRouter();
+    const { toast } = useToast();
     const [error, setError] = useState(false);
     const form = useForm({
         defaultValues: {
@@ -25,7 +27,6 @@ const LoginCard = () => {
         },
     });
     const adminLogin = useAdminLogin();
-    const { user, isLoading } = useAdminGetSession();
 
     const handleLogin = (email, password) => {
         adminLogin.mutate(
@@ -38,6 +39,10 @@ const LoginCard = () => {
                     setError(false);
                     console.log('login success');
                     router.push('/');
+                    toast({
+                        title: 'Đăng nhập thành công',
+                        description: 'Chào mừng bạn đến với DMB Industrial',
+                    });
                 },
                 onError: (error) => {
                     console.log('login error', error);
@@ -96,11 +101,7 @@ const LoginCard = () => {
                                 Tên đăng nhập hoặc mật khẩu không đúng
                             </FormMessage>
                         )}
-                        <button
-                            name="data"
-                            // type="submit"
-                            className="btn btn-primary w-full"
-                        >
+                        <button name="data" className="btn btn-primary w-full">
                             Đăng nhập
                         </button>
                     </form>
