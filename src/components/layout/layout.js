@@ -44,9 +44,6 @@ function Layout({ children }) {
     const router = useRouter();
     const { user, isLoading } = useAdminGetSession();
     const adminLogout = useAdminDeleteSession();
-    if (!isLoading && !user) {
-        window.location.href = '/login';
-    }
 
     const handleLogout = () => {
         adminLogout.mutate(undefined, {
@@ -55,6 +52,18 @@ function Layout({ children }) {
             },
         });
     };
+    if (!isLoading && !user) {
+        window.location.href = '/login';
+    }
+
+    if (isLoading) {
+        return (
+            <div className="flex h-screen w-screen items-center justify-center">
+                <span className="loading loading-spinner text-green-500"></span>
+            </div>
+        );
+    }
+
     return (
         <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
             <div className="hidden border-r bg-muted/40 md:block">

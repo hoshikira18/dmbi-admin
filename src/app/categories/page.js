@@ -22,10 +22,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Categories = () => {
     const { product_categories, isLoading } = useAdminProductCategories();
-    console.log(product_categories);
-    // product_categories.map((category, index) => {
-    //     console.log(category)
-    // })
 
     return (
         <Layout>
@@ -41,7 +37,7 @@ const Categories = () => {
                                 Danh mục mới
                             </button>
                         }
-                        size="lg"
+                        size="md"
                     >
                         <NewCategory />
                     </DialogComponent>
