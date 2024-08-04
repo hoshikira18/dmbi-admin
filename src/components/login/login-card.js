@@ -35,13 +35,13 @@ const LoginCard = () => {
             },
             {
                 onSuccess: () => {
-                    // setError(false);
+                    setError(false);
                     console.log('login success');
-                    // router.push('/');
+                    router.push('/');
                 },
                 onError: (error) => {
                     console.log('login error', error);
-                    // setError(true);
+                    setError(true);
                 },
             }
         );
@@ -105,14 +105,6 @@ const LoginCard = () => {
                         </button>
                     </form>
                 </Form>
-                <button
-                    className="btn btn-primary"
-                    onClick={() => {
-                        console.log(user);
-                    }}
-                >
-                    Click
-                </button>
             </CardContent>
         </Card>
     );
