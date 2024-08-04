@@ -13,7 +13,7 @@ import {
     useAdminUpdateProductCategory,
 } from 'medusa-react';
 import { Input } from '@/components/ui/input';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { set, useForm } from 'react-hook-form';
 
 const CategoryDetailPage = ({ params }) => {
@@ -55,6 +55,12 @@ const CategoryDetailPage = ({ params }) => {
             }
         );
     };
+
+    useEffect(() => {
+        if (!product_category) return;
+        form.setValue('name', product_category.name);
+        form.setValue('image', product_category.metadata.image);
+    }, [isCategoryLoading, product_category, form]);
 
     return (
         <Layout>
