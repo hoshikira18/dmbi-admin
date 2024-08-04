@@ -1,15 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
+import DialogComponent from '@/components/common/dialog';
+import ImageUpload from '@/components/common/image-upload';
 import { Layout } from '@/components/layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Form } from '@/components/ui/form';
 import { formatDate } from '@/lib/utils';
-import { Label } from '@radix-ui/react-dropdown-menu';
-import { Car } from 'lucide-react';
+import { Car, Pencil } from 'lucide-react';
 import { useAdminProductCategory, useProductCategory } from 'medusa-react';
-import React from 'react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 const CategoryDetailPage = ({ params }) => {
     const { product_category, isLoading } = useAdminProductCategory(params.id);
+    const imageForm = useForm({
+        defaultValues: {
+            image: '',
+        },
+    });
+
+    const [newImage, setNewImage] = useState([]);
 
     return (
         <Layout>
@@ -30,6 +40,22 @@ const CategoryDetailPage = ({ params }) => {
                             </span>
                         </div>
                         <div className="relative overflow-hidden rounded-lg border-2 border-gray-400">
+                            <div className="absolute right-2 top-2 z-20">
+                                <DialogComponent
+                                    title={'Thay đổi ảnh'}
+                                    triggerButton={
+                                        <button className="btn btn-square bg-green-500/30 hover:bg-green-500/50">
+                                            <Pencil size={15} />
+                                        </button>
+                                    }
+                                >
+                                    <Form {...imageForm}>
+                                        <form>
+                                            <ImageUpload />
+                                        </form>
+                                    </Form>
+                                </DialogComponent>
+                            </div>
                             <img
                                 src={product_category?.metadata?.image}
                                 alt="category-image"
