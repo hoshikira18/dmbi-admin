@@ -5,21 +5,52 @@ import ImageUpload from '@/components/common/image-upload';
 import { Layout } from '@/components/layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form } from '@/components/ui/form';
-import { formatDate } from '@/lib/utils';
+import { useToast } from '@/components/ui/use-toast';
+import { formatDate, uploadFile } from '@/lib/utils';
 import { Car, Pencil } from 'lucide-react';
-import { useAdminProductCategory, useProductCategory } from 'medusa-react';
+import {
+    useAdminProductCategory,
+    useAdminUpdateProductCategory,
+    useProductCategory,
+} from 'medusa-react';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const CategoryDetailPage = ({ params }) => {
+    const { toast } = useToast();
     const { product_category, isLoading } = useAdminProductCategory(params.id);
+
+    const updateProductCategory = useAdminUpdateProductCategory(params.id);
     const imageForm = useForm({
         defaultValues: {
             image: '',
         },
     });
 
-    const [newImage, setNewImage] = useState([]);
+    const handleUpdateCategory = (
+        name = product_category?.name,
+        image = product_category?.metadata.image
+    ) => {
+        updateProductCategory.mutate(
+            {
+                name,
+                metadata: {
+                    image,
+                },
+            },
+            {
+                onSuccess: ({ product_category }) => {
+                    console.log(product_category);
+                    toast({
+                        title: 'Cập nhật danh mục thành công',
+                        description: `Danh mục ${product_category.name} đã được cập nhật`,
+                    });
+                },
+            }
+        );
+    };
+
+    const [files, setFiles] = useState([]);
 
     return (
         <Layout>
@@ -43,6 +74,7 @@ const CategoryDetailPage = ({ params }) => {
                             <div className="absolute right-2 top-2 z-20">
                                 <DialogComponent
                                     title={'Thay đổi ảnh'}
+                                    size="md"
                                     triggerButton={
                                         <button className="btn btn-square bg-green-500/30 hover:bg-green-500/50">
                                             <Pencil size={15} />
@@ -51,7 +83,27 @@ const CategoryDetailPage = ({ params }) => {
                                 >
                                     <Form {...imageForm}>
                                         <form>
-                                            <ImageUpload />
+                                            <ImageUpload
+                                                files={files}
+                                                setFiles={setFiles}
+                                            />
+                                            <button
+                                                className="btn btn-primary w-full"
+                                                onClick={imageForm.handleSubmit(
+                                                    async () => {
+                                                        await uploadFile(
+                                                            files
+                                                        ).then((res) => {
+                                                            handleUpdateCategory(
+                                                                product_category?.name,
+                                                                res
+                                                            );
+                                                        });
+                                                    }
+                                                )}
+                                            >
+                                                Lưu thay đổi
+                                            </button>
                                         </form>
                                     </Form>
                                 </DialogComponent>
