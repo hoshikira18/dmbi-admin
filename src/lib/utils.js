@@ -25,10 +25,11 @@ export const uploadFiles = async (files) => {
 };
 
 export const formatDate = (date) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(date).toLocaleDateString('VI', options);
-};
+    const options = {year: 'numeric', month: 'long', day: 'numeric'};
+    return new Date(date).toLocaleDateString("VI", options)
+}
 
 export const formatNumber = (number) => {
-    return new Intl.NumberFormat().format(number);
-};
+    return new Intl.NumberFormat().format(number)
+}
+
