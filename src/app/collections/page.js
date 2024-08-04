@@ -1,27 +1,12 @@
-'use client';
-import { Layout } from '@/components/layout';
-import DialogComponent from '@/components/common/dialog';
-import NewCollectionCard from '@/components/collection/new-collection';
-import { useAdminCollections } from 'medusa-react';
+import CollectionsTemplate from '@/components/collection/collection-template';
+
+export const metadata = {
+    title: 'DMBI | Bộ sưu tập',
+    description: 'Collections page',
+};
 
 const CollectionsPage = () => {
-    const { collections, isLoading } = useAdminCollections();
-    console.log(collections);
-    return (
-        <Layout>
-            <DialogComponent
-                title="Tạo mới danh mục"
-                triggerButton={
-                    <button className="btn bg-green-500 text-primary-foreground hover:bg-green-400">
-                        Bộ sưu tập mới
-                    </button>
-                }
-                size="md"
-            >
-                <NewCollectionCard />
-            </DialogComponent>
-        </Layout>
-    );
+    return <CollectionsTemplate />;
 };
 
 export default CollectionsPage;
