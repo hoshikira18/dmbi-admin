@@ -57,6 +57,7 @@ const CategoryDetailPage = ({ params }) => {
             <Card>
                 <CardHeader>
                     <CardTitle>{product_category?.name}</CardTitle>
+                    
                 </CardHeader>
                 <CardContent>
                     <div className="flex flex-col space-y-4">
