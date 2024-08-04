@@ -20,6 +20,10 @@ const Navigation = () => {
                 <Package className="h-4 w-4" />
                 Danh mục
             </NavItem>
+            <NavItem isOn={params === '/collections'} href="/collections">
+                <Package className="h-4 w-4" />
+                Bộ sưu tập
+            </NavItem>
         </nav>
     );
 };

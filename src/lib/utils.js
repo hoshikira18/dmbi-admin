@@ -1,5 +1,4 @@
 import { clsx } from 'clsx';
-import { formatAmount } from 'medusa-react';
 import { twMerge } from 'tailwind-merge';
 import { medusaClient } from './config';
 
@@ -33,3 +32,4 @@ export const formatDate = (date) => {
 export const formatNumber = (number) => {
     return new Intl.NumberFormat().format(number)
 }
+
