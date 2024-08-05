@@ -25,7 +25,7 @@ const CategoriesTemplate = () => {
 
     return (
         <Layout>
-            <Card>
+            <Card className="bg-orange-100">
                 <CardHeader>
                     <div className="flex justify-between">
                         <CardTitle className="inline-flex text-left">
@@ -54,23 +54,25 @@ const CategoriesTemplate = () => {
                             <TableCaption>Test</TableCaption>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="w-[80px]">
+                                    <TableHead className="w-[40px]">
                                         STT
                                     </TableHead>
                                     <TableHead className="w-[150px]">
                                         Mã ID
                                     </TableHead>
-                                    <TableHead className="pl-[40px]">
+                                    <TableHead className="w-[230px] pl-[50px]">
                                         Tên danh mục
                                     </TableHead>
-                                    <TableHead>Handle</TableHead>
-                                    <TableHead>Ngày khởi tạo</TableHead>
+                                    <TableHead className="w-[230px] px-[50px]">
+                                        Handle
+                                    </TableHead>
+                                    <TableHead className="w-[220px] pr-[50px]">Ngày khởi tạo</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {product_categories?.map((category, index) => (
                                     <TableRow key={category.id}>
-                                        <TableCell>
+                                        <TableCell className="w-[40px]">
                                             <Link
                                                 href={`/categories/${category.id}`}
                                                 key={category.id}
@@ -86,7 +88,7 @@ const CategoriesTemplate = () => {
                                                 {category.id}
                                             </Link>
                                         </TableCell>
-                                        <TableCell className="pl-[40px]">
+                                        <TableCell className="max-w-[200px] truncate pl-[50px]">
                                             <Link
                                                 href={`/categories/${category.id}`}
                                                 key={category.id}
@@ -94,8 +96,15 @@ const CategoriesTemplate = () => {
                                                 {category.name}
                                             </Link>
                                         </TableCell>
-                                        <TableCell>{category.handle}</TableCell>
-                                        <TableCell>
+                                        <TableCell className="max-w-[230px] truncate px-[50px]">
+                                            <Link
+                                                href={`/categories/${category.id}`}
+                                                key={category.id}
+                                            >
+                                                {category.handle}
+                                            </Link>
+                                        </TableCell>
+                                        <TableCell className="w-[230px] pr-[50px]">
                                             {formatDate(category.created_at)}
                                         </TableCell>
                                         <TableCell>
