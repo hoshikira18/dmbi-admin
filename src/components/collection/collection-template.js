@@ -15,7 +15,7 @@ import {
 import { CirclePlus } from 'lucide-react';
 import CollectionItemOptions from './collection-item-option';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { formatDate } from '@/lib/utils';
+import { formatDate } from '@/utils/index';
 
 const CollectionsTemplate = () => {
     const { collections, isLoading } = useAdminCollections();
@@ -54,10 +54,12 @@ const CollectionsTemplate = () => {
                                     <TableHead className="w-[180px]">
                                         Mã ID bộ sưu tập
                                     </TableHead>
-                                    <TableHead className="pl-[100px] w-[400px] pr-[70px]">
+                                    <TableHead className="w-[400px] pl-[100px] pr-[70px]">
                                         Tên bộ sưu tập
                                     </TableHead>
-                                    <TableHead className="w-[230px] pr-[80px]">Ngày khởi tạo</TableHead>
+                                    <TableHead className="w-[230px] pr-[80px]">
+                                        Ngày khởi tạo
+                                    </TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -69,7 +71,7 @@ const CollectionsTemplate = () => {
                                         <TableCell className="max-w-[180px] truncate">
                                             {collection.id}
                                         </TableCell>
-                                        <TableCell className="pl-[100px] pr-[70px] max-w-[400px] truncate">
+                                        <TableCell className="max-w-[400px] truncate pl-[100px] pr-[70px]">
                                             {collection.title}
                                         </TableCell>
                                         <TableCell className="w-[230px] pr-[80px]">
