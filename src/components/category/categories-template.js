@@ -13,9 +13,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { handler } from 'tailwindcss-animate';
 import { formatDate } from '@/lib/utils';
-import { Ellipsis } from 'lucide-react';
 import CategoryItemOptions from '@/components/category/category-item-option';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';

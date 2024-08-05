@@ -8,16 +8,21 @@ import {
     FormControl,
     FormMessage,
 } from '../ui/form';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import { useAdminLogin } from 'medusa-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '../ui/use-toast';
+import { useAuth, useAuthStore } from '@/store/auth-store';
+import { getToken } from '@/lib/data';
 
 const LoginCard = () => {
     const router = useRouter();
     const { toast } = useToast();
     const [error, setError] = useState(false);
+
+    const { setToken } = useAuthStore();
+
     const form = useForm({
         defaultValues: {
             username: '',
@@ -33,13 +38,16 @@ const LoginCard = () => {
                 password,
             },
             {
-                onSuccess: () => {
+                onSuccess: async () => {
                     setError(false);
                     console.log('login success');
                     router.push('/');
                     toast({
                         title: 'Đăng nhập thành công',
                         description: 'Chào mừng bạn đến với DMB Industrial',
+                    });
+                    await getToken(email, password).then((res) => {
+                        setToken(res);
                     });
                 },
                 onError: (error) => {
