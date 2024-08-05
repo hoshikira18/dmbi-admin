@@ -11,3 +11,15 @@ export const getPartners = async () => {
         });
     return partners;
 };
+
+export const getPartner = async (id) => {
+    const partner = await instance
+        .get(`/partners/${id}`)
+        .then((res) => {
+            return res.data;
+        })
+        .catch((error) => {
+            console.error('Error: ', error);
+        });
+    return partner;
+};
