@@ -13,7 +13,6 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { handler } from 'tailwindcss-animate';
 import { formatDate } from '@/lib/utils';
 import { CirclePlus, Ellipsis } from 'lucide-react';
 import CategoryItemOptions from '@/components/category/category-item-option';
@@ -66,7 +65,9 @@ const CategoriesTemplate = () => {
                                     <TableHead className="w-[230px] px-[50px]">
                                         Handle
                                     </TableHead>
-                                    <TableHead className="w-[220px] pr-[50px]">Ngày khởi tạo</TableHead>
+                                    <TableHead className="w-[220px] pr-[50px]">
+                                        Ngày khởi tạo
+                                    </TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
