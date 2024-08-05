@@ -13,7 +13,7 @@ import { useAdminLogin } from 'medusa-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '../ui/use-toast';
-import { useAuth, useAuthStore } from '@/store/auth-store';
+import { useAuthStore } from '@/store/auth-store';
 import { getToken } from '@/lib/data';
 
 const LoginCard = () => {
@@ -46,9 +46,9 @@ const LoginCard = () => {
                         title: 'Đăng nhập thành công',
                         description: 'Chào mừng bạn đến với DMB Industrial',
                     });
-                    await getToken(email, password).then((res) => {
-                        setToken(res);
-                    });
+                    const token = await getToken({ email, password });
+                    console.log('token', token);
+                    setToken(token);
                 },
                 onError: (error) => {
                     console.log('login error', error);

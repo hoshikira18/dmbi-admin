@@ -19,7 +19,6 @@ const NewCollectionCard = () => {
     });
 
     const [files, setFiles] = useState([]);
-    const [handle, setHandle] = useState('');
 
     const handleCreateCollection = (title, image) => {
         const handle = formatHandle(title);
