@@ -10,7 +10,7 @@ import { formatHandle, uploadFile } from '@/lib/utils';
 const NewCollectionCard = () => {
     const { toast } = useToast();
     const createCollection = useAdminCreateCollection();
-
+    const [isLoading, setIsLoading] = useState(false);
     const form = useForm({
         defaultValues: {
             title: '',
@@ -19,6 +19,7 @@ const NewCollectionCard = () => {
     });
 
     const [files, setFiles] = useState([]);
+    const [handle, setHandle] = useState('');
 
     const handleCreateCollection = (title, image) => {
         const handle = formatHandle(title);
@@ -37,6 +38,7 @@ const NewCollectionCard = () => {
                         title: 'Tạo mới bộ sưu tập thành công',
                         description: `Bộ sưu tập ${collection.title} đã được tạo`,
                     });
+                    setIsLoading(false);
                     form.reset();
                     setFiles([]);
                 },
@@ -74,6 +76,7 @@ const NewCollectionCard = () => {
                     <ImageUpload files={files} setFiles={setFiles} />
                     <button
                         onClick={form.handleSubmit(async (data) => {
+                            setIsLoading(true);
                             await uploadFile(files[0]).then((url) => {
                                 handleCreateCollection(
                                     data['title'],
@@ -84,6 +87,9 @@ const NewCollectionCard = () => {
                         })}
                         className="btn btn-primary w-full"
                     >
+                        {isLoading &&(
+                            <span className="loading loading-spinner"></span>
+                        )}
                         Tạo bộ sưu tập
                     </button>
                 </form>

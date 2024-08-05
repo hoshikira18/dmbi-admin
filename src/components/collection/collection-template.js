@@ -15,13 +15,14 @@ import {
 import { CirclePlus } from 'lucide-react';
 import CollectionItemOptions from './collection-item-option';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { formatDate } from '@/lib/utils';
 
 const CollectionsTemplate = () => {
     const { collections, isLoading } = useAdminCollections();
     console.log(collections);
     return (
         <Layout>
-            <Card>
+            <Card className="bg-orange-100">
                 <CardHeader>
                     <div className="flex justify-between">
                         <div>
@@ -47,32 +48,32 @@ const CollectionsTemplate = () => {
                             <TableCaption>Test Caption</TableCaption>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="w-[80px]">
+                                    <TableHead className="w-[100px] pl-[30px]">
                                         STT
                                     </TableHead>
-                                    <TableHead className="w-[150px]">
+                                    <TableHead className="w-[180px]">
                                         Mã ID bộ sưu tập
                                     </TableHead>
-                                    <TableHead className="pl-[80px]">
+                                    <TableHead className="pl-[100px] w-[400px] pr-[70px]">
                                         Tên bộ sưu tập
                                     </TableHead>
-                                    <TableHead>Ngày khởi tạo</TableHead>
+                                    <TableHead className="w-[230px] pr-[80px]">Ngày khởi tạo</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {collections?.map((collection, index) => (
                                     <TableRow key="collection.id">
-                                        <TableCell className="w-[80px]">
+                                        <TableCell className="w-[100px] pl-[30px]">
                                             {index + 1}
                                         </TableCell>
-                                        <TableCell className="max-w-[150px] truncate">
+                                        <TableCell className="max-w-[180px] truncate">
                                             {collection.id}
                                         </TableCell>
-                                        <TableCell className="pl-[80px]">
-                                            {collection.handle}
+                                        <TableCell className="pl-[100px] pr-[70px] max-w-[400px] truncate">
+                                            {collection.title}
                                         </TableCell>
-                                        <TableCell>
-                                            {collection.created_at}
+                                        <TableCell className="w-[230px] pr-[80px]">
+                                            {formatDate(collection.created_at)}
                                         </TableCell>
                                         <TableCell>
                                             <CollectionItemOptions
