@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Form, FormField, FormItem } from '../ui/form';
 import { Input } from '../ui/input';
 import ImageUpload from '../common/image-upload';
-import { uploadFile } from '@/lib/utils';
+import { formatHandle, uploadFile } from '@/lib/utils';
 import { useToast } from '../ui/use-toast';
 const NewCategory = () => {
     const { toast } = useToast();
@@ -15,12 +15,15 @@ const NewCategory = () => {
     const form = useForm({
         defaultValues: {
             name: '',
-            handle: '',
             image: '',
         },
     });
+
     const [files, setFiles] = useState([]);
-    const handleCreateCategory = (name, handle, image) => {
+    const [handle, setHandle] = useState('');
+
+    const handleCreateCategory = (name, image) => {
+        const handle = formatHandle(name);
         createCategory.mutate(
             {
                 name,
@@ -49,41 +52,26 @@ const NewCategory = () => {
         <div className="relative">
             <Form {...form}>
                 <form className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                        <FormField
-                            control={form.control}
-                            name="category-name"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <label htmlFor="name">Tên danh mục</label>
-                                    <Input
-                                        id="category-name"
-                                        placeholder="Danh mục mới"
-                                        {...form.register('category-name', {
-                                            required: true,
-                                        })}
-                                    />
-                                </FormItem>
-                            )}
-                        />
-
-                        <FormField
-                            control={form.control}
-                            name="Đường dẫn"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <label htmlFor="handle">Đường dẫn</label>
-                                    <Input
-                                        id="handle"
-                                        placeholder="danh-muc-moi"
-                                        {...form.register('handle', {
-                                            required: true,
-                                        })}
-                                    />
-                                </FormItem>
-                            )}
-                        />
-                    </div>
+                    <FormField
+                        control={form.control}
+                        name="category-name"
+                        render={({ field }) => (
+                            <FormItem>
+                                <label htmlFor="name">Tên danh mục</label>
+                                <Input
+                                    id="category-name"
+                                    placeholder="Danh mục mới"
+                                    onChange={(e) => {
+                                        setHandle(formatHandle(e.target.value));
+                                        console.log(handle);
+                                    }}
+                                    {...form.register('category-name', {
+                                        required: true,
+                                    })}
+                                />
+                            </FormItem>
+                        )}
+                    />
                     <ImageUpload files={files} setFiles={setFiles} />
                     <button
                         onClick={form.handleSubmit(async (data) => {
