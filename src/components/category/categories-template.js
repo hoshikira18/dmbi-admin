@@ -42,7 +42,9 @@ const CategoriesTemplate = () => {
                                     </button>
                                 }
                                 size="md"
-                            ></DialogComponent>
+                            >
+                                <NewCategory />
+                            </DialogComponent>
                         </div>
                     </div>
                 </CardHeader>
