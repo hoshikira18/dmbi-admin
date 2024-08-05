@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/table';
 import { handler } from 'tailwindcss-animate';
 import { formatDate } from '@/lib/utils';
-import { Ellipsis } from 'lucide-react';
+import { CirclePlus, Ellipsis } from 'lucide-react';
 import CategoryItemOptions from '@/components/category/category-item-option';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -27,21 +27,26 @@ const CategoriesTemplate = () => {
         <Layout>
             <Card>
                 <CardHeader>
-                    <CardTitle>Categories</CardTitle>
+                    <div className="flex justify-between">
+                        <CardTitle className="inline-flex text-left">
+                            Các danh mục
+                        </CardTitle>
+                        <div>
+                            <DialogComponent
+                                className="inline-flex text-right"
+                                title="Tạo mới danh mục"
+                                triggerButton={
+                                    <button className="btn bg-green-500 text-primary-foreground hover:bg-green-400">
+                                        <CirclePlus />
+                                        Danh mục mới
+                                    </button>
+                                }
+                                size="md"
+                            ></DialogComponent>
+                        </div>
+                    </div>
                 </CardHeader>
                 <CardContent>
-                    <DialogComponent
-                        title="Tạo mới danh mục"
-                        triggerButton={
-                            <button className="btn bg-green-500 text-primary-foreground hover:bg-green-400">
-                                Danh mục mới
-                            </button>
-                        }
-                        size="md"
-                    >
-                        <NewCategory />
-                    </DialogComponent>
-
                     {
                         <Table>
                             <TableCaption>Test</TableCaption>
@@ -51,18 +56,18 @@ const CategoriesTemplate = () => {
                                         STT
                                     </TableHead>
                                     <TableHead className="w-[150px]">
-                                        ID
+                                        Mã ID
                                     </TableHead>
                                     <TableHead className="pl-[40px]">
-                                        CategoryName
+                                        Tên danh mục
                                     </TableHead>
                                     <TableHead>Handle</TableHead>
-                                    <TableHead>CreateAt</TableHead>
+                                    <TableHead>Ngày khởi tạo</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {product_categories?.map((category, index) => (
-                                    <TableRow key={category.handle}>
+                                    <TableRow key={category.id}>
                                         <TableCell>
                                             <Link
                                                 href={`/categories/${category.id}`}
