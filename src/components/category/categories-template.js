@@ -14,6 +14,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import { formatDate } from '@/lib/utils';
+import { CirclePlus, Ellipsis } from 'lucide-react';
 import CategoryItemOptions from '@/components/category/category-item-option';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -23,45 +24,56 @@ const CategoriesTemplate = () => {
 
     return (
         <Layout>
-            <Card>
+            <Card className="bg-orange-100">
                 <CardHeader>
-                    <CardTitle>Categories</CardTitle>
+                    <div className="flex justify-between">
+                        <CardTitle className="inline-flex text-left">
+                            Các danh mục
+                        </CardTitle>
+                        <div>
+                            <DialogComponent
+                                className="inline-flex text-right"
+                                title="Tạo mới danh mục"
+                                triggerButton={
+                                    <button className="btn bg-green-500 text-primary-foreground hover:bg-green-400">
+                                        <CirclePlus />
+                                        Danh mục mới
+                                    </button>
+                                }
+                                size="md"
+                            >
+                                <NewCategory />
+                            </DialogComponent>
+                        </div>
+                    </div>
                 </CardHeader>
                 <CardContent>
-                    <DialogComponent
-                        title="Tạo mới danh mục"
-                        triggerButton={
-                            <button className="btn bg-green-500 text-primary-foreground hover:bg-green-400">
-                                Danh mục mới
-                            </button>
-                        }
-                        size="md"
-                    >
-                        <NewCategory />
-                    </DialogComponent>
-
                     {
                         <Table>
                             <TableCaption>Test</TableCaption>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="w-[80px]">
+                                    <TableHead className="w-[40px]">
                                         STT
                                     </TableHead>
                                     <TableHead className="w-[150px]">
-                                        ID
+                                        Mã ID
                                     </TableHead>
-                                    <TableHead className="pl-[40px]">
-                                        CategoryName
+                                    <TableHead className="w-[230px] pl-[50px]">
+                                        Tên danh mục
                                     </TableHead>
-                                    <TableHead>Handle</TableHead>
-                                    <TableHead>CreateAt</TableHead>
+                                    <TableHead className="w-[230px] px-[50px]">
+                                        Handle
+                                    </TableHead>
+                                    <TableHead className="w-[220px] pr-[50px]">
+                                        Ngày khởi tạo
+                                    </TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {product_categories?.map((category, index) => (
-                                    <TableRow key={category.handle}>
-                                        <TableCell>
+                                    <TableRow key={category.id}>
+                                        <TableCell className="w-[40px]">
                                             <Link
                                                 href={`/categories/${category.id}`}
                                                 key={category.id}
@@ -77,7 +89,7 @@ const CategoriesTemplate = () => {
                                                 {category.id}
                                             </Link>
                                         </TableCell>
-                                        <TableCell className="pl-[40px]">
+                                        <TableCell className="max-w-[200px] truncate pl-[50px]">
                                             <Link
                                                 href={`/categories/${category.id}`}
                                                 key={category.id}
@@ -85,8 +97,15 @@ const CategoriesTemplate = () => {
                                                 {category.name}
                                             </Link>
                                         </TableCell>
-                                        <TableCell>{category.handle}</TableCell>
-                                        <TableCell>
+                                        <TableCell className="max-w-[230px] truncate px-[50px]">
+                                            <Link
+                                                href={`/categories/${category.id}`}
+                                                key={category.id}
+                                            >
+                                                {category.handle}
+                                            </Link>
+                                        </TableCell>
+                                        <TableCell className="w-[230px] pr-[50px]">
                                             {formatDate(category.created_at)}
                                         </TableCell>
                                         <TableCell>
