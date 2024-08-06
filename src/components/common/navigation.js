@@ -1,6 +1,15 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
-import { Home, LineChart, Package, Package2, User2, Users } from 'lucide-react';
+import {
+    Home,
+    LineChart,
+    Monitor,
+    Package,
+    Package2,
+    Pen,
+    User2,
+    Users,
+} from 'lucide-react';
 import NavItem from './nav-item';
 const navigationItems = [
     {
@@ -27,6 +36,21 @@ const navigationItems = [
         name: 'Đối tác',
         icon: User2,
         href: '/partners',
+    },
+    {
+        name: 'Bài viết',
+        icon: Pen,
+        href: '/posts',
+    },
+    {
+        name: 'Yêu cầu báo giá',
+        icon: Monitor,
+        href: '/quote-requests',
+    },
+    {
+        name: 'Câu hỏi của khách hàng',
+        icon: Users,
+        href: '/customer-questions',
     },
 ];
 const Navigation = () => {

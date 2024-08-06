@@ -6,20 +6,18 @@ import { Layout } from '@/components/layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormField, FormItem } from '@/components/ui/form';
 import { useToast } from '@/components/ui/use-toast';
-import { formatDate, uploadFile } from '@/lib/utils';
 import { Car, Pencil } from 'lucide-react';
-import {
-    useAdminCollection,
-    useAdminUpdateCollection,
-} from 'medusa-react';
+import { useAdminCollection, useAdminUpdateCollection } from 'medusa-react';
 import { Input } from '@/components/ui/input';
 import React, { useEffect, useState } from 'react';
 import { set, useForm } from 'react-hook-form';
+import { formatDate } from '@/lib/utils';
 
 const CollectionDetailTemplate = ({ params }) => {
     const { toast } = useToast();
-    const { product_collection, isLoading: isCollectionLoading } =
+    const { collection: product_collection, isLoading: isCollectionLoading } =
         useAdminCollection(params.id);
+    console.log(product_collection);
 
     const updateProductCollection = useAdminUpdateCollection(params.id);
     const form = useForm({

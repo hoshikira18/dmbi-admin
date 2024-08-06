@@ -1,6 +1,6 @@
-import { Eclipse, Ellipsis } from 'lucide-react'
-import React from 'react'
-import { Button } from "@/components/ui/button"
+import { Eclipse, Ellipsis } from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -14,23 +14,25 @@ import {
     DropdownMenuSubContent,
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import Link from 'next/link'
+} from '@/components/ui/dropdown-menu';
+import Link from 'next/link';
 
-const CollectionItemOptions = ({id}) => {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">
-            <Ellipsis />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="">
-      <DropdownMenuItem><Link href={`/categories/${id}`}>Chi tiết</Link></DropdownMenuItem>
-      <DropdownMenuItem>Xóa</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
-}
+const CollectionItemOptions = ({ id }) => {
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="outline">
+                    <Ellipsis />
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="">
+                <DropdownMenuItem>
+                    <Link href={`/collections/${id}`}>Chi tiết</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>Xóa</DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    );
+};
 
-export default CollectionItemOptions
+export default CollectionItemOptions;

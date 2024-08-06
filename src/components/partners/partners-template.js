@@ -103,6 +103,9 @@ const PartnersTemplate = () => {
                                                 <TableCell className="text-right">
                                                     <button
                                                         onClick={async () => {
+                                                            toast({
+                                                                title: `Đang xóa đối tác ${partner.name}`,
+                                                            });
                                                             handleDeletePartner(
                                                                 partner.id
                                                             );

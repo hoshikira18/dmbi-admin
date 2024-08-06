@@ -1,4 +1,4 @@
-import { instance } from '@/utils/axios';
+import { instance } from '@/contexts/axios';
 
 export const getPartners = async () => {
     const partners = await instance
