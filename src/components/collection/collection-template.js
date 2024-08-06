@@ -15,8 +15,7 @@ import {
 import { CirclePlus } from 'lucide-react';
 import CollectionItemOptions from './collection-item-option';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { formatDate } from '@/lib/utils';
-import Link from 'next/link';
+import { formatDate } from '@/utils/index';
 
 const CollectionsTemplate = () => {
     const { collections, isLoading } = useAdminCollections();

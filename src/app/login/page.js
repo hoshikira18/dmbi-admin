@@ -1,6 +1,7 @@
 'use client';
 
 import LoginCard from '@/components/login/login-card';
+import { getAuth } from '@/store/auth-store';
 
 const Login = () => {
     return (

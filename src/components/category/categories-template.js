@@ -13,8 +13,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { handler } from 'tailwindcss-animate';
-import { formatDate } from '@/lib/utils';
+import { formatDate } from '@/utils/index';
 import { CirclePlus, Ellipsis } from 'lucide-react';
 import CategoryItemOptions from '@/components/category/category-item-option';
 import Link from 'next/link';

@@ -5,7 +5,7 @@ import { useToast } from '../ui/use-toast';
 import { Form, FormField, FormItem } from '../ui/form';
 import { Input } from '../ui/input';
 import ImageUpload from '../common/image-upload';
-import { formatHandle, uploadFile } from '@/lib/utils';
+import { formatHandle, uploadFile } from '@/utils/index';
 
 const NewCollectionCard = () => {
     const { toast } = useToast();
@@ -19,7 +19,6 @@ const NewCollectionCard = () => {
     });
 
     const [files, setFiles] = useState([]);
-    const [handle, setHandle] = useState('');
 
     const handleCreateCollection = (title, image) => {
         const handle = formatHandle(title);
@@ -87,7 +86,7 @@ const NewCollectionCard = () => {
                         })}
                         className="btn btn-primary w-full"
                     >
-                        {isLoading &&(
+                        {isLoading && (
                             <span className="loading loading-spinner"></span>
                         )}
                         Tạo bộ sưu tập
