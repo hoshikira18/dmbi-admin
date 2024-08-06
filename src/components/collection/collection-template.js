@@ -15,7 +15,7 @@ import {
 import { CirclePlus } from 'lucide-react';
 import CollectionItemOptions from './collection-item-option';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { formatDate } from '@/lib/utils';
+import { formatDate } from '@/utils/index';
 import Link from 'next/link';
 
 const CollectionsTemplate = () => {
@@ -78,7 +78,6 @@ const CollectionsTemplate = () => {
                                             {collection.id}
                                         </TableCell>
                                         <TableCell className="max-w-[200px] truncate pr-[60px]">
-
                                             {collection.title}
                                         </TableCell>
                                         <TableCell className="w-1/4">
