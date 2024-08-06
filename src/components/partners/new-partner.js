@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { Label } from '../ui/label';
 import ImageUpload from '../common/image-upload';
 import { set, useForm } from 'react-hook-form';
-import { uploadFile } from '@/utils';
+import { uploadFile } from '@/lib/utils';
 
 const NewPartner = () => {
     const { toast } = useToast();

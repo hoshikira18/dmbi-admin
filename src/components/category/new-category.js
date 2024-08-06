@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Form, FormField, FormItem } from '../ui/form';
 import { Input } from '../ui/input';
 import ImageUpload from '../common/image-upload';
-import { formatHandle, uploadFile } from '@/utils/index';
+import { formatHandle, uploadFile } from '@/lib/utils';
 import { useToast } from '../ui/use-toast';
 const NewCategory = () => {
     const { toast } = useToast();
@@ -79,7 +79,6 @@ const NewCategory = () => {
                             await uploadFile(files[0]).then((url) => {
                                 handleCreateCategory(
                                     data['category-name'],
-                                    data['handle'],
                                     url
                                 );
                             });
