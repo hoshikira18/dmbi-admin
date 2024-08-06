@@ -16,13 +16,14 @@ import { CirclePlus } from 'lucide-react';
 import CollectionItemOptions from './collection-item-option';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { formatDate } from '@/lib/utils';
+import Link from 'next/link';
 
 const CollectionsTemplate = () => {
     const { collections, isLoading } = useAdminCollections();
     console.log(collections);
     return (
         <Layout>
-            <Card className="bg-orange-100">
+            <Card>
                 <CardHeader>
                     <div className="flex justify-between">
                         <div>
@@ -48,31 +49,38 @@ const CollectionsTemplate = () => {
                             <TableCaption>Test Caption</TableCaption>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="w-[100px] pl-[30px]">
+                                    <TableHead className="w-1/10">
                                         STT
                                     </TableHead>
-                                    <TableHead className="w-[180px]">
+                                    <TableHead className="w-1/4">
                                         Mã ID bộ sưu tập
                                     </TableHead>
-                                    <TableHead className="pl-[100px] w-[400px] pr-[70px]">
+                                    <TableHead className="w-1/4">
                                         Tên bộ sưu tập
                                     </TableHead>
-                                    <TableHead className="w-[230px] pr-[80px]">Ngày khởi tạo</TableHead>
+                                    <TableHead className="w-1/4">
+                                        Ngày khởi tạo
+                                    </TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {collections?.map((collection, index) => (
                                     <TableRow key="collection.id">
-                                        <TableCell className="w-[100px] pl-[30px]">
-                                            {index + 1}
+                                        <TableCell className="w-1/10">
+                                            <Link
+                                                href={`/collections/${collection.id}`}
+                                                key={collection.id}
+                                            >
+                                                {index + 1}
+                                            </Link>
                                         </TableCell>
-                                        <TableCell className="max-w-[180px] truncate">
+                                        <TableCell className="max-w-[180px] truncate pr-[60px]">
                                             {collection.id}
                                         </TableCell>
-                                        <TableCell className="pl-[100px] pr-[70px] max-w-[400px] truncate">
+                                        <TableCell className="max-w-[200px] truncate pr-[60px]">
                                             {collection.title}
                                         </TableCell>
-                                        <TableCell className="w-[230px] pr-[80px]">
+                                        <TableCell className="w-1/4">
                                             {formatDate(collection.created_at)}
                                         </TableCell>
                                         <TableCell>
