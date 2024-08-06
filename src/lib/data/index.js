@@ -1,6 +1,6 @@
 import { medusaClient } from '@/lib/config';
 
-export const getToken = async (email, password) => {
+export const getToken = async ({ email, password }) => {
     const access_token = medusaClient.admin.auth
         .getToken({
             email,

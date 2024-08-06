@@ -78,6 +78,7 @@ const CollectionsTemplate = () => {
                                             {collection.id}
                                         </TableCell>
                                         <TableCell className="max-w-[200px] truncate pr-[60px]">
+
                                             {collection.title}
                                         </TableCell>
                                         <TableCell className="w-1/4">
