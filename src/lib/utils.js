@@ -37,7 +37,7 @@ export const formatHandle = (handle) => {
 export const uploadFile = async (file) => {
     const url = await medusaClient.admin.uploads
         .create(file)
-        .then(({ uploads }) => uploads[0].url)
+        .then(({ uploads }) => uploads[0]?.url)
         .catch((error) => {
             console.log(error);
         });
