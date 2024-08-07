@@ -61,10 +61,6 @@ const NewCategory = () => {
                                 <Input
                                     id="category-name"
                                     placeholder="Danh mục mới"
-                                    onChange={(e) => {
-                                        setHandle(formatHandle(e.target.value));
-                                        console.log(handle);
-                                    }}
                                     {...form.register('category-name', {
                                         required: true,
                                     })}
@@ -76,7 +72,7 @@ const NewCategory = () => {
                     <button
                         onClick={form.handleSubmit(async (data) => {
                             setIsLoading(true);
-                            await uploadFile(files[0]).then((url) => {
+                            await uploadFile(files).then((url) => {
                                 handleCreateCategory(
                                     data['category-name'],
                                     url

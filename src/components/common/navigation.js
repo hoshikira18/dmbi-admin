@@ -40,7 +40,12 @@ const navigationItems = [
     {
         name: 'Bài viết',
         icon: Pen,
-        href: '/posts',
+        href: '/blog',
+    },
+    {
+        name: 'Danh mục bài viết',
+        icon: Pen,
+        href: '/blog/categories',
     },
     {
         name: 'Yêu cầu báo giá',

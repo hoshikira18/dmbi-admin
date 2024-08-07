@@ -1,4 +1,4 @@
-import { useCreatePartner } from '@/api/hook';
+import { useCreatePartner } from '@/api/partner/hook';
 import { useToast } from '../ui/use-toast';
 import { Input } from '../ui/input';
 import { Form, FormField, FormItem, FormLabel } from '../ui/form';

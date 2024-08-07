@@ -15,11 +15,13 @@ import { useRouter } from 'next/navigation';
 import { useToast } from '../ui/use-toast';
 import { useAuthStore } from '@/store/auth-store';
 import { getToken } from '@/lib/data';
+import Spinner from '../common/spinner';
 
 const LoginCard = () => {
     const router = useRouter();
     const { toast } = useToast();
     const [error, setError] = useState(false);
+    const [isLoginLoading, setIsLoginLoading] = useState(false);
 
     const { setToken } = useAuthStore();
 
@@ -32,6 +34,7 @@ const LoginCard = () => {
     const adminLogin = useAdminLogin();
 
     const handleLogin = (email, password) => {
+        setIsLoginLoading(true);
         adminLogin.mutate(
             {
                 email,
@@ -39,6 +42,7 @@ const LoginCard = () => {
             },
             {
                 onSuccess: async () => {
+                    setIsLoginLoading(false);
                     setError(false);
                     console.log('login success');
                     router.push('/');
@@ -108,6 +112,7 @@ const LoginCard = () => {
                             </FormMessage>
                         )}
                         <button name="data" className="btn btn-primary w-full">
+                            {isLoginLoading && <Spinner />}
                             Đăng nhập
                         </button>
                     </form>

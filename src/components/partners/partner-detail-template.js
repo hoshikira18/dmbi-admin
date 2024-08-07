@@ -1,6 +1,6 @@
 'use client';
 
-import { usePartner } from '@/api/hook';
+import { usePartner } from '@/api/partner/hook';
 
 const PartnerDetailTemplate = ({ params }) => {
     const { data, isLoading } = usePartner(params.id);
