@@ -1,4 +1,3 @@
-import { getPartner } from '@/api/api';
 import PartnerDetailTemplate from '@/components/partners/partner-detail-template';
 
 const PartnerDetailPage = async ({ params }) => {
