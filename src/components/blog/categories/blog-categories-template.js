@@ -76,7 +76,7 @@ const BlogCategoriesTemplate = () => {
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {blogCategories.map((category, index) => (
+                                {blogCategories?.map((category, index) => (
                                     <TableRow key={category.id}>
                                         <TableCell>{index + 1}</TableCell>
                                         <TableCell className="">
