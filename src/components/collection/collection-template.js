@@ -75,10 +75,20 @@ const CollectionsTemplate = () => {
                                             </Link>
                                         </TableCell>
                                         <TableCell className="max-w-[180px] truncate pr-[60px]">
-                                            {collection.id}
+                                            <Link
+                                                href={`/collections/${collection.id}`}
+                                                key={collection.id}
+                                            >
+                                                {collection.id}
+                                            </Link>
                                         </TableCell>
                                         <TableCell className="max-w-[200px] truncate pr-[60px]">
-                                            {collection.title}
+                                            <Link
+                                                href={`/collections/${collection.id}`}
+                                                key={collection.id}
+                                            >
+                                                {collection.title}
+                                            </Link>
                                         </TableCell>
                                         <TableCell className="w-1/4">
                                             {formatDate(collection.created_at)}
