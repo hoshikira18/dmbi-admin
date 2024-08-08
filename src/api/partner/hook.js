@@ -1,8 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createPartner, deletePartner, getPartner, getPartners } from './api';
 
-const staleTime = 5 * 60 * 1000; // 5 minutes
-const cacheTime = 10 * 60 * 1000; // 10 minutes
+import { staleTime, cacheTime } from '@/contexts/constants';
 
 export const usePartners = () => {
     return useQuery(['partners'], getPartners, {

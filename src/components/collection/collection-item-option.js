@@ -1,6 +1,6 @@
-import { Eclipse, Ellipsis } from 'lucide-react'
-import React from 'react'
-import { Button } from "@/components/ui/button"
+import { Eclipse, Ellipsis } from 'lucide-react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -41,4 +41,4 @@ const CollectionItemOptions = ({id}) => {
   )
 }
 
-export default CollectionItemOptions
+export default CollectionItemOptions;

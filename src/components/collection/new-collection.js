@@ -5,7 +5,7 @@ import { useToast } from '../ui/use-toast';
 import { Form, FormField, FormItem } from '../ui/form';
 import { Input } from '../ui/input';
 import ImageUpload from '../common/image-upload';
-import { formatHandle, uploadFile } from '@/utils/index';
+import { formatHandle, uploadFile, uploadFiles } from '@/lib/utils';
 
 const NewCollectionCard = () => {
     const { toast } = useToast();
@@ -76,12 +76,9 @@ const NewCollectionCard = () => {
                     <button
                         onClick={form.handleSubmit(async (data) => {
                             setIsLoading(true);
-                            await uploadFile(files[0]).then((url) => {
-                                handleCreateCollection(
-                                    data['title'],
-                                    data['handle'],
-                                    url
-                                );
+                            await uploadFile(files).then((url) => {
+                                console.log(url);
+                                handleCreateCollection(data['title'], url);
                             });
                         })}
                         className="btn btn-primary w-full"

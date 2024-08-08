@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useDeletePartner, usePartners } from '@/api/hook';
+import { useDeletePartner, usePartners } from '@/api/partner/hook';
 import { Layout } from '../layout';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import {
@@ -103,6 +103,9 @@ const PartnersTemplate = () => {
                                                 <TableCell className="text-right">
                                                     <button
                                                         onClick={async () => {
+                                                            toast({
+                                                                title: `Đang xóa đối tác ${partner.name}`,
+                                                            });
                                                             handleDeletePartner(
                                                                 partner.id
                                                             );

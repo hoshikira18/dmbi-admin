@@ -15,7 +15,7 @@ import {
 import { CirclePlus } from 'lucide-react';
 import CollectionItemOptions from './collection-item-option';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { formatDate } from '@/utils/index';
+import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 
 const CollectionsTemplate = () => {
@@ -65,7 +65,7 @@ const CollectionsTemplate = () => {
                             </TableHeader>
                             <TableBody>
                                 {collections?.map((collection, index) => (
-                                    <TableRow key="collection.id">
+                                    <TableRow key={collection.id}>
                                         <TableCell className="w-1/10">
                                             <Link
                                                 href={`/collections/${collection.id}`}

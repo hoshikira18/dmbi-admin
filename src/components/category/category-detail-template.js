@@ -6,8 +6,8 @@ import { Layout } from '@/components/layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormField, FormItem } from '@/components/ui/form';
 import { useToast } from '@/components/ui/use-toast';
+import { formatDate } from '@/lib/utils';
 import { uploadFile } from '@/lib/utils';
-import { formatDate } from '@/utils/index';
 import { Car, Pencil } from 'lucide-react';
 import {
     useAdminProductCategory,
