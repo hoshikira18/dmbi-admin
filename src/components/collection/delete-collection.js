@@ -23,19 +23,13 @@ const CollectionDeleteButton = ({ id }) => {
 
     return (
         <div className="m-[-10px] p-[-10px]">
-            <div>
-                <div>Bạn có muốn xóa bộ sưu tập này?</div>
-            </div>
             <div className="mt-[25px] flex justify-around">
-                <button className="h-[50px] w-2/5 rounded bg-red-500"
+                <button className="h-[50px] w-4/5 rounded bg-red-500"
                     onClick={() => {
                         handleDelete()
                     }}
                 >
                     Có
-                </button>
-                <button className="h-[50px] w-2/5 rounded bg-green-500">
-                    Không
                 </button>
             </div>
         </div>

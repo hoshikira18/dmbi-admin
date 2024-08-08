@@ -36,6 +36,8 @@ const CategoryItemOptions = ({ id }) => {
                     </div>
                 </Link>
                 <DialogComponent
+                    title={"Bạn có muốn xóa danh mục này?"}
+                    description={"⚠️Thao tác này không thể hoàn lại!"}
                     triggerButton={
                         <div className="w-1/1 mx-auto mt-[2px] h-[30px] rounded bg-red-400 py-[4px] text-center align-middle">
                             <button>Xóa</button>
