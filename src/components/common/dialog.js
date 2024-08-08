@@ -25,7 +25,7 @@ const DialogComponent = ({
         <Dialog>
             <DialogTrigger asChild>{triggerButton}</DialogTrigger>
             <DialogContent
-                className={`max-h-screen ${dialogSize[size]} overflow-scroll`}
+                className={`max-h-screen ${dialogSize[size]} overflow-auto`}
             >
                 <DialogHeader>
                     <DialogTitle>{title}</DialogTitle>
