@@ -71,3 +71,51 @@ export const createPost = async (post) => {
         });
     return newPost;
 };
+
+export const getPosts = async () => {
+    const posts = await instance
+        .get('/posts')
+        .then((res) => {
+            return res.data;
+        })
+        .catch((error) => {
+            console.error('Error: ', error);
+        });
+    return posts;
+};
+
+export const getPost = async (id) => {
+    const post = await instance
+        .get(`/posts/${id}`)
+        .then((res) => {
+            return res.data;
+        })
+        .catch((error) => {
+            console.error('Error: ', error);
+        });
+    return post;
+};
+
+export const deletePost = async (id) => {
+    const deletedPost = await instance
+        .delete(`/posts?id=${id}`)
+        .then((res) => {
+            return res.data;
+        })
+        .catch((error) => {
+            console.error('Error: ', error);
+        });
+    return deletedPost;
+};
+
+export const updatePost = async (id, post) => {
+    const updatedPost = await instance
+        .put(`/posts?id=${id}`, post)
+        .then((res) => {
+            return res.data;
+        })
+        .catch((error) => {
+            console.error('Error: ', error);
+        });
+    return updatedPost;
+};
