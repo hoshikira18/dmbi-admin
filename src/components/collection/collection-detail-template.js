@@ -46,20 +46,7 @@ const CollectionDetailTemplate = ({ params }) => {
                     console.log(product_collection);
                     toast({
                         title: 'Cập nhật danh mục thành công',
-                        description: `Danh mục ${product_collection.name} đã được cập nhật`,
-                    });
-                    setIsSaving(false);
-                },
-            }
-        );
-    };
-
-    useEffect(() => {
-        if (!product_collection) return;
-        form.setValue('name', product_collection.name);
-        form.setValue('image', product_collection.metadata.image);
-    }, [isCollectionLoading, product_collection, form]);
-
+                        description: `Danh
     return (
         <Layout>
             <Card className="relative">

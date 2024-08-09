@@ -1,4 +1,3 @@
-import RequireLabel from '@/components/common/require-label';
 import { formatDate } from '@/lib/utils';
 
 const { useBlogCategory } = require('@/api/blog/hook');
