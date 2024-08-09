@@ -4,7 +4,6 @@ import { useBlogCategory, useBlogPost } from '@/api/blog/hook';
 import Spinner from '../common/spinner';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Layout } from '../layout';
-import { formatDate } from '@/lib/utils';
 import GeneralInfor from './detail/general';
 
 const PostDetailTemplate = ({ params }) => {
