@@ -1,4 +1,4 @@
-import PriceQuoteTemplate from '@/components/price-quote/price-quote-template';
+import PriceQuoteTemplate from '@/components/quote-requests/price-quote-template';
 
 const PriceQuotePage = () => {
     return <PriceQuoteTemplate />;
