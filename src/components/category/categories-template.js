@@ -18,9 +18,14 @@ import { CirclePlus, Ellipsis } from 'lucide-react';
 import CategoryItemOptions from '@/components/category/category-item-option';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import React from 'react';
+import { useAdminDeleteProductCategory } from 'medusa-react';
+import { useToast } from '../ui/use-toast';
+import CategoryDeleteButton from './delete-category';
 
 const CategoriesTemplate = () => {
     const { product_categories, isLoading } = useAdminProductCategories();
+    const { toast } = useToast();
 
     return (
         <Layout>

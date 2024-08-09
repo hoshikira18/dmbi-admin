@@ -11,7 +11,7 @@ import { useAdminCollection, useAdminUpdateCollection } from 'medusa-react';
 import { Input } from '@/components/ui/input';
 import React, { useEffect, useState } from 'react';
 import { set, useForm } from 'react-hook-form';
-import { formatDate } from '@/lib/utils';
+import { formatDate, uploadFile } from '@/lib/utils';
 
 const CollectionDetailTemplate = ({ params }) => {
     const { toast } = useToast();

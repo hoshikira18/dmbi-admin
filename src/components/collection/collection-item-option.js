@@ -1,4 +1,4 @@
-import { Eclipse, Ellipsis } from 'lucide-react';
+import { Eclipse, Ellipsis, TriangleAlert, TriangleAlertIcon } from 'lucide-react';
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import {
@@ -14,25 +14,34 @@ import {
     DropdownMenuSubContent,
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import Link from 'next/link';
+} from "@/components/ui/dropdown-menu"
+import Link from 'next/link'
+import DialogComponent from '../common/dialog'
+import CollectionDeleteButton from './delete-collection'
 
-const CollectionItemOptions = ({ id }) => {
-    return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <Button variant="outline">
-                    <Ellipsis />
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="">
-                <DropdownMenuItem>
-                    <Link href={`/collections/${id}`}>Chi tiết</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>Xóa</DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
-    );
-};
+const CollectionItemOptions = ({id}) => {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">
+            <Ellipsis />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="">
+      <Link href={`/collections/${id}`}>
+                    <div className="mx-auto mb-[2px] h-[30px] w-1/1 bg-green-400 py-[4px] align-middle text-center rounded">
+                        Chi tiết
+                    </div>
+                </Link>
+                    <DialogComponent 
+                    title={"Bạn có muốn xóa bộ sưu tập này?"}
+                    description={"⚠️Thao tác này không thể hoàn lại!"}
+                    triggerButton={<div className="mx-auto mt-[2px] h-[30px] w-1/1 bg-red-400 py-[4px] align-middle text-center rounded"><button>Xóa</button></div>}>
+                    <CollectionDeleteButton id={id} />
+                    </DialogComponent>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
 
 export default CollectionItemOptions;
