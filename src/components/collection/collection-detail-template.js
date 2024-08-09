@@ -138,11 +138,12 @@ const CollectionDetailTemplate = ({ params }) => {
                                 />
                             </div>
                         </div>
+
                     </CardContent>
                 </Card>
             </Layout>
         );
     };
-};
+
 
 export default CollectionDetailTemplate;
