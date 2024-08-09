@@ -3,9 +3,13 @@ import {
     createBlogCategory,
     createPost,
     deleteBlogCategory,
+    deletePost,
     getBlogCategories,
     getBlogCategory,
+    getPost,
+    getPosts,
     updateBlogCategory,
+    updatePost,
 } from './api';
 import { staleTime, cacheTime } from '@/contexts/constants';
 
@@ -80,6 +84,53 @@ export const useCreatePost = () => {
         },
         onError: (error) => {
             console.error('Error creating post:', error);
+        },
+    });
+};
+
+export const useBlogPosts = () => {
+    return useQuery(['posts'], () => getPosts(), {
+        staleTime,
+        cacheTime,
+        onError: (error) => {
+            console.error('Error fetching posts:', error);
+        },
+    });
+};
+
+export const useBlogPost = (id) => {
+    return useQuery(['post'], () => getPost(id), {
+        staleTime,
+        cacheTime,
+        onError: (error) => {
+            console.error('Error fetching post:', error);
+        },
+    });
+};
+
+export const useDeleteBlogPost = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: deletePost,
+        onSuccess: () => {
+            queryClient.invalidateQueries('posts');
+        },
+        onError: (error) => {
+            console.error('Error deleting post:', error);
+        },
+    });
+};
+
+export const useUpdatePost = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation((data) => updatePost(data.id, data.post), {
+        onSuccess: () => {
+            queryClient.invalidateQueries('posts');
+        },
+        onError: (error) => {
+            console.error('Error updating post:', error);
         },
     });
 };
