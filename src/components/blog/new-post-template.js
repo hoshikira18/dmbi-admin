@@ -131,6 +131,7 @@ const NewPostTemplate = () => {
                                                 image: url,
                                             });
                                         });
+                                        
                                     })}
                                     className="btn btn-primary w-full"
                                 >
