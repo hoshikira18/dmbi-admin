@@ -45,7 +45,7 @@ const CustomerQuestionsTemplate = () => {
                             <TableCaption>All question</TableCaption>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="w-1/6">STT</TableHead>
+                                    <TableHead className="w-1/15">STT</TableHead>
                                     <TableHead className="w-1/8">
                                         Thời gian
                                     </TableHead>
@@ -66,12 +66,7 @@ const CustomerQuestionsTemplate = () => {
                             <TableBody>
                                 {customerQuestions?.map((question, index) => (
                                     <TableRow key={question.id}>
-                                        <TableCell className="w-1/6">
-                                            <input
-                                                id={question.id}
-                                                type="checkbox"
-                                                className="align-middles mr-[5px]"
-                                            />
+                                        <TableCell className="w-1/15">
                                             {index + 1}
                                         </TableCell>
                                         <TableCell className="w-1/8">
@@ -106,21 +101,6 @@ const CustomerQuestionsTemplate = () => {
                     }
                 </CardContent>
             </Card>
-
-            <button
-                className="btn btn-primary"
-                onClick={() => {
-                    customerQuestions?.map((chosenQuestion, index) =>{
-                        var isChecked  = document.getElementById(chosenQuestion.id).checked;
-                        if(isChecked==true){
-                            handleDelete(chosenQuestion.id);
-                            console.log(chosenQuestion.id);
-                        };
-                    });
-                }}
-            >
-                Delete All Choice
-            </button>
         </Layout>
     );
 };
