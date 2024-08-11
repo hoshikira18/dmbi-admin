@@ -21,6 +21,9 @@ const PriceQuoteTemplate = () => {
     console.log(priceRequests);
 
     const { mutate: deletePriceRequest } = useDeletePriceRequest();
+    const handleDelete = (id) => {
+        deletePriceRequest(id);
+    };
 
     return (
         <Layout>
@@ -65,7 +68,7 @@ const PriceQuoteTemplate = () => {
                                             <button
                                                 className="btn bg-blue-600"
                                                 onClick={() => {
-                                                    handleDelete(question.id);
+                                                    handleDelete(request.id);
                                                 }}
                                             >
                                                 Delete
