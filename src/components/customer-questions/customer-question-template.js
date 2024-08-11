@@ -17,6 +17,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import { formatDate } from '@/lib/utils';
+import { check } from 'prettier';
 
 const CustomerQuestionsTemplate = () => {
     const { data: customerQuestions } = useCustomerQuestions();
@@ -40,35 +41,64 @@ const CustomerQuestionsTemplate = () => {
                 </CardHeader>
                 <CardContent>
                     {
-                        <Table>
+                        <Table id="questionTable">
                             <TableCaption>All question</TableCaption>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead>STT</TableHead>
-                                    <TableHead>Thời gian</TableHead>
-                                    <TableHead>Tên khách hàng</TableHead>
-                                    <TableHead>SĐT</TableHead>
-                                    <TableHead>Email</TableHead>
-                                    <TableHead>Ghi chú</TableHead>
+                                    <TableHead className="w-1/6">STT</TableHead>
+                                    <TableHead className="w-1/8">
+                                        Thời gian
+                                    </TableHead>
+                                    <TableHead className="mr-[20px] w-1/6">
+                                        Tên khách hàng
+                                    </TableHead>
+                                    <TableHead className="w-1/10">
+                                        SĐT
+                                    </TableHead>
+                                    <TableHead className="w-1/6">
+                                        Email
+                                    </TableHead>
+                                    <TableHead className="w-1/4">
+                                        Ghi chú
+                                    </TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {customerQuestions?.map((question, index) => (
                                     <TableRow key={question.id}>
-                                        <TableCell>{index + 1}</TableCell>
-                                        <TableCell>
+                                        <TableCell className="w-1/6">
+                                            <input
+                                                id={question.id}
+                                                type="checkbox"
+                                                className="align-middles mr-[5px]"
+                                            />
+                                            {index + 1}
+                                        </TableCell>
+                                        <TableCell className="w-1/8">
                                             {formatDate(question.created_at)}
                                         </TableCell>
-                                        <TableCell>
+                                        <TableCell className="mr-[10px] w-1/6">
                                             {question.customerName}
                                         </TableCell>
-                                        <TableCell>
+                                        <TableCell className="w-1/10 max-w-[200px] truncate">
                                             {question.customerPhone}
                                         </TableCell>
-                                        <TableCell>
+                                        <TableCell className="w-1/6 max-w-[120px] truncate">
                                             {question.customerEmail}
                                         </TableCell>
-                                        <TableCell>{question.note}</TableCell>
+                                        <TableCell className="w-1/4 max-w-[180px]">
+                                            {question.note}
+                                        </TableCell>
+                                        <TableCell className="w-1/20">
+                                            <button
+                                                className="btn bg-blue-600"
+                                                onClick={() => {
+                                                    handleDelete(question.id);
+                                                }}
+                                            >
+                                                Delete
+                                            </button>
+                                        </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -80,12 +110,16 @@ const CustomerQuestionsTemplate = () => {
             <button
                 className="btn btn-primary"
                 onClick={() => {
-                    handleDelete(
-                        'customer-questions_01J4W2GPT0TD3AQ7BP0273J1F1'
-                    );
+                    customerQuestions?.map((chosenQuestion, index) =>{
+                        var isChecked  = document.getElementById(chosenQuestion.id).checked;
+                        if(isChecked==true){
+                            handleDelete(chosenQuestion.id);
+                            console.log(chosenQuestion.id);
+                        };
+                    });
                 }}
             >
-                Delete
+                Delete All Choice
             </button>
         </Layout>
     );
