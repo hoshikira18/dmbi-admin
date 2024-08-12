@@ -65,28 +65,28 @@ const BlogCategoriesTemplate = () => {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="w-[100px]">
+                                    <TableHead className="w-1/15">
                                         STT
                                     </TableHead>
-                                    <TableHead className="w-[250px]">
+                                    <TableHead className="w-1/4 max-w-[150px]">
                                         Tên danh mục
                                     </TableHead>
-                                    <TableHead>Hình ảnh</TableHead>
-                                    <TableHead className="min-w-[300px] text-right"></TableHead>
+                                    <TableHead className="w-1/2">Hình ảnh</TableHead>
+                                    <TableHead className="w-1/4 max-w-[200px] text-right"></TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {blogCategories?.map((category, index) => (
                                     <TableRow key={category.id}>
-                                        <TableCell>{index + 1}</TableCell>
-                                        <TableCell className="">
+                                        <TableCell className="w-1/15">{index + 1}</TableCell>
+                                        <TableCell className="w-1/4 max-w-[150px] pr-[30px]">
                                             {category.title}
                                         </TableCell>
-                                        <TableCell>
+                                        <TableCell className="w-3/5">
                                             <img
                                                 src={category.image}
                                                 alt={category.name}
-                                                className="h-[250px] w-full border-2 object-cover"
+                                                className="h-1/4 min-h-[100px] max-h-[350px] min-w-[150px] w-full border-2 object-cover"
                                             />
                                         </TableCell>
                                         <TableCell className="space-x-2 text-right">
