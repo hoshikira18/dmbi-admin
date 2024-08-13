@@ -74,7 +74,7 @@ const PartnersTemplate = () => {
                                         <TableHead className="w-1/15">
                                             STT
                                         </TableHead>
-                                        <TableHead className="w-1/4">
+                                        <TableHead className="w-1/4 max-w-[150px]">
                                             Tên
                                         </TableHead>
                                         <TableHead className="w-1/2">
@@ -90,14 +90,14 @@ const PartnersTemplate = () => {
                                                 <TableCell className="w-1/15">
                                                     {index + 1}
                                                 </TableCell>
-                                                <TableCell className="w-1/4 font-medium">
+                                                <TableCell className="w-1/4 max-w-[150px] min-w-[150px] font-medium">
                                                     {partner.name}
                                                 </TableCell>
                                                 <TableCell className="w-1/2">
                                                     <img
                                                         src={partner.image_url}
                                                         alt={partner.name}
-                                                        className="h-1/4 max-h-[350px] min-h-[100px] w-full border-2 object-cover"
+                                                        className="h-1/4 min-h-[100px] max-h-[350px] min-w-[150px] w-full border-2 object-cover"
                                                     />
                                                 </TableCell>
                                                 <TableCell className="text-right">
