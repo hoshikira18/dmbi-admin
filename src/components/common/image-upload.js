@@ -1,6 +1,7 @@
 import { set } from 'react-hook-form';
 import { FormField, FormItem } from '../ui/form';
 import { useEffect, useState } from 'react';
+import { Input } from '../ui/input';
 const ImageUpload = ({ multiple = false, files, setFiles }) => {
     const [preview, setPreview] = useState([]);
 
@@ -39,18 +40,33 @@ const ImageUpload = ({ multiple = false, files, setFiles }) => {
                     </FormItem>
                 )}
             />
-            <div className="flex flex-wrap gap-4">
-                {files &&
-                    preview.map((image) => (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                            key={image}
-                            src={image}
-                            alt="Preview"
-                            className="w-full rounded-lg border border-gray-300 object-cover"
-                        />
-                    ))}
-            </div>
+            {multiple ? (
+                <div className="grid grid-cols-12 gap-4">
+                    {files &&
+                        preview.map((image) => (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                                key={image}
+                                src={image}
+                                alt="Preview"
+                                className="w-full rounded-lg border border-gray-300 object-cover"
+                            />
+                        ))}
+                </div>
+            ) : (
+                <div className="flex flex-wrap gap-4">
+                    {files &&
+                        preview.map((image) => (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                                key={image}
+                                src={image}
+                                alt="Preview"
+                                className="w-full rounded-lg border border-gray-300 object-cover"
+                            />
+                        ))}
+                </div>
+            )}
         </div>
     );
 };
