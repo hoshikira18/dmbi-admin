@@ -1,22 +1,18 @@
-import axios from 'axios';
+export function uploadImageCloudinary(images) {
+    const formData = new FormData();
+    formData.append('file', images[0]);
 
-export async function uploadImageToCloudinary(imageFile) {
-    try {
-        const formData = new FormData();
-        formData.append('file', imageFile);
-        formData.append(
-            'upload_preset',
-            process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
-        ); // Replace with your Cloudinary upload preset
+    formData.append('upload_preset', 'preset-next-test');
 
-        const response = await axios.post(
-            `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
-            formData
-        );
-
-        return response.data;
-    } catch (error) {
-        console.error('Image upload error:', error);
-        throw error;
-    }
+    return fetch('https://api.cloudinary.com/v1_1/dt3rk0j3l/image/upload', {
+        method: 'POST',
+        body: formData,
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            return data;
+        })
+        .catch((error) => {
+            console.error('Image upload error:', error);
+        });
 }
