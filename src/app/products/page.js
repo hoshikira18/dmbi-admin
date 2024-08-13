@@ -1,11 +1,9 @@
-import TokenDisplay from '@/components/common/token';
 import { Layout } from '@/components/layout';
+import ProductPageTemplate from '@/components/product/product-page-template';
 import React from 'react';
 const Products = () => {
     return (
-        <Layout>
-            <TokenDisplay />
-        </Layout>
+        <ProductPageTemplate />
     );
 };
 
