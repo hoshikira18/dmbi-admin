@@ -8,6 +8,7 @@ import {
     TableBody,
     TableCaption,
     TableCell,
+    TableFooter,
     TableHead,
     TableHeader,
     TableRow,
@@ -46,7 +47,6 @@ const CollectionsTemplate = () => {
                 <CardContent>
                     {
                         <Table>
-                            <TableCaption>Test Caption</TableCaption>
                             <TableHeader>
                                 <TableRow>
                                     <TableHead className="w-1/10">
@@ -101,6 +101,7 @@ const CollectionsTemplate = () => {
                                     </TableRow>
                                 ))}
                             </TableBody>
+                            <TableFooter></TableFooter>
                         </Table>
                     }
                 </CardContent>

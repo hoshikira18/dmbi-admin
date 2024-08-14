@@ -55,7 +55,6 @@ const CategoriesTemplate = () => {
                 <CardContent>
                     {
                         <Table>
-                            <TableCaption>Test</TableCaption>
                             <TableHeader>
                                 <TableRow>
                                     <TableHead className="w-1/12">

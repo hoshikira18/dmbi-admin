@@ -42,7 +42,6 @@ const CustomerQuestionsTemplate = () => {
                 <CardContent>
                     {
                         <Table id="questionTable">
-                            <TableCaption>All question</TableCaption>
                             <TableHeader>
                                 <TableRow>
                                     <TableHead className="w-1/15">STT</TableHead>

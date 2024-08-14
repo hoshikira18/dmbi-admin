@@ -34,7 +34,6 @@ const PriceQuoteTemplate = () => {
                 <CardContent>
                     {
                         <Table>
-                            <TableCaption>All Price Quote</TableCaption>
                             <TableHeader>
                                 <TableRow>
                                     <TableHead className="w-1/15">
