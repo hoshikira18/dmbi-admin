@@ -5,9 +5,8 @@ export const metadata = {
     description: 'Collection detail page',
 };
 
-const CollectionDetailPage = ({params}) => {
+const CollectionDetailPage = ({ params }) => {
     return <CollectionDetailTemplate params={params} />;
 };
 
 export default CollectionDetailPage;
-

@@ -67,3 +67,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .fr-view {
+    @apply prose; 
+  }
+}
+
+.no-tailwind {
+      all: unset;
+}
