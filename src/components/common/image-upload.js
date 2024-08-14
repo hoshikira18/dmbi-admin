@@ -1,8 +1,15 @@
 import { set } from 'react-hook-form';
-import { FormField, FormItem } from '../ui/form';
+import { FormField, FormItem, FormLabel } from '../ui/form';
 import { useEffect, useState } from 'react';
 import { Input } from '../ui/input';
-const ImageUpload = ({ multiple = false, files, setFiles }) => {
+import TooltipComponent from './tooltip';
+const ImageUpload = ({
+    multiple = false,
+    files,
+    setFiles,
+    label = 'Hình ảnh',
+    description = '',
+}) => {
     const [preview, setPreview] = useState([]);
 
     useEffect(() => {
@@ -26,9 +33,9 @@ const ImageUpload = ({ multiple = false, files, setFiles }) => {
                 name={`image${multiple ? 's' : ''}`}
                 render={({ field }) => (
                     <FormItem>
-                        <label htmlFor={`image${multiple ? 's' : ''}`}>
-                            Hình ảnh
-                        </label>
+                        <TooltipComponent content={description}>
+                            <FormLabel>{label}</FormLabel>
+                        </TooltipComponent>
                         <input
                             id={`image${multiple ? 's' : ''}`}
                             type="file"
@@ -41,7 +48,7 @@ const ImageUpload = ({ multiple = false, files, setFiles }) => {
                 )}
             />
             {multiple ? (
-                <div className="grid grid-cols-12 gap-4">
+                <div className="grid grid-cols-6 gap-4">
                     {files &&
                         preview.map((image) => (
                             // eslint-disable-next-line @next/next/no-img-element

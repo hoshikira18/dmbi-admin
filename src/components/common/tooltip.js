@@ -6,16 +6,12 @@ import {
     TooltipTrigger,
 } from '../ui/tooltip';
 
-const TooltipComponent = ({ content }) => {
+const TooltipComponent = ({ children, content }) => {
     return (
         <TooltipProvider>
             <Tooltip>
-                <TooltipTrigger>
-                    <MessageCircle size={15} />
-                </TooltipTrigger>
-                <TooltipContent>
-                    <p>{content}</p>
-                </TooltipContent>
+                <TooltipTrigger>{children}</TooltipTrigger>
+                <TooltipContent>{content}</TooltipContent>
             </Tooltip>
         </TooltipProvider>
     );
