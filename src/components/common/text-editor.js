@@ -2,7 +2,7 @@
 
 import { uploadImageCloudinary } from '@/lib/cloudinary';
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+import { Label } from '../ui/label';
 
 const FroalaEditorView = dynamic(
     () => import('react-froala-wysiwyg/FroalaEditorView'),
@@ -13,7 +13,7 @@ const FroalaEditor = dynamic(
     async () => {
         const values = await Promise.all([
             import('react-froala-wysiwyg'), // must be first import since we are doing values[0] in return
-            import('froala-editor/js/plugins/image.min.js'),
+            import('froala-editor/js/plugins.pkgd.min.js'),
             import('froala-editor/css/froala_style.min.css'),
             import('froala-editor/css/froala_editor.pkgd.min.css'),
         ]);
@@ -25,9 +25,7 @@ const FroalaEditor = dynamic(
     }
 );
 
-const TextEditor = () => {
-    const [value, setValue] = useState('');
-
+const TextEditor = ({ description = '', setDescription }) => {
     const config = {
         events: {
             'image.beforeUpload': async function (images) {
@@ -57,17 +55,17 @@ const TextEditor = () => {
     };
 
     return (
-        <div>
+        <div className="space-y-2">
+            <Label htmlFor="description">Mô tả sản phẩm</Label>
             <FroalaEditor
-                model={value}
+                model={description}
                 tag="textarea"
                 config={config}
                 onModelChange={(e) => {
-                    setValue(e);
+                    setDescription(e);
                     console.log(e);
                 }}
             />
-            <FroalaEditorView model={value} />
         </div>
     );
 };

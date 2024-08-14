@@ -5,7 +5,6 @@ import { useAdminProductCategories } from 'medusa-react';
 
 const CategoriesSelector = ({ categories, setCategories }) => {
     const { product_categories, isLoading } = useAdminProductCategories();
-    console.log(product_categories);
 
     if (isLoading) {
         return <p>Loading...</p>;
@@ -16,7 +15,7 @@ const CategoriesSelector = ({ categories, setCategories }) => {
     }));
 
     return (
-        <div className="space-y-2">
+        <div className="z-50 space-y-2">
             <label className="text-sm font-semibold">Danh mục</label>
             <MultiSelect
                 options={options}

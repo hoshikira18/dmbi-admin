@@ -11,35 +11,102 @@ import {
     FormLabel,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import CollectionSelector from './collection-selector';
 import CategoriesSelector from './categories-selector';
 import { useState } from 'react';
 import ImageUpload from '@/components/common/image-upload';
 import TextEditor from '@/components/common/text-editor';
+import { useAdminCreateProduct } from 'medusa-react';
+import { formatHandle, uploadFile, uploadFiles } from '@/lib/utils';
+import { useToast } from '@/components/ui/use-toast';
+import Spinner from '@/components/common/spinner';
+import { ToastAction } from '@/components/ui/toast';
+import { Link } from 'next/link';
+import { Label } from '@/components/ui/label';
 
 const NewProductTemplate = () => {
     // Image state
-    const [files, setFiles] = useState([]);
+    const { toast } = useToast();
+    const [images, setImages] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [thumbnail, setThumbnail] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [description, setDescription] = useState('');
+    const [specifications, setSpecifications] = useState([]);
     const form = useForm({
         defaultValues: {
             title: '',
-            options: ['normal'],
-            variants: {
-                title: 'normal',
-                prices: {
-                    amount: 0,
-                },
-            },
+            origin_country: '',
+            collection_id: '',
             metadata: {
+                guarantee: '',
+                technology: '',
+                inventory: '',
                 model: '',
                 uses: '',
             },
         },
     });
+
+    const createPayload = async (data) => {
+        return {
+            title: data.title,
+            status: 'published',
+            is_giftcard: false,
+            discountable: false,
+            description: description,
+            collection_id: data.collection_id,
+            categories: categories.map((c) => {
+                return {
+                    id: c.value,
+                };
+            }),
+            handle: formatHandle(data.title),
+            images: await uploadFiles(images),
+            origin_country: data.origin_country,
+            thumbnail: await uploadFile(thumbnail),
+            metadata: {
+                uses: data.metadata.uses,
+                model: data.metadata.model,
+                guarantee: data.metadata.guarantee,
+                technology: data.metadata.technology,
+                inventory: data.metadata.inventory,
+                specifications: specifications,
+            },
+        };
+    };
+
+    const createProduct = useAdminCreateProduct();
+
+    const handleCreateProduct = (productData) => {
+        createProduct.mutate(productData, {
+            onSuccess: ({ product }) => {
+                toast({
+                    title: 'Thành công',
+                    description: `Sản phẩm ${product.title} đã được tạo!`,
+                });
+                setIsLoading(false);
+            },
+            onError: (error) => {
+                toast({
+                    title: 'Lỗi',
+                    description: 'Đã có lỗi xảy ra!',
+                });
+                setIsLoading(false);
+            },
+        });
+    };
+
     return (
         <Layout>
+            {isLoading && (
+                <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50">
+                    {/* <div className="rounded-lg bg-white p-4"> */}
+                    <Spinner />
+                    {/* </div> */}
+                </div>
+            )}
             <Card>
                 <CardHeader>
                     <CardTitle>Tạo sản phẩm mới</CardTitle>
@@ -47,8 +114,9 @@ const NewProductTemplate = () => {
                 <CardContent>
                     <Form {...form}>
                         <form
-                            onSubmit={form.handleSubmit(() => {
-                                console.log(form.getValues());
+                            onSubmit={form.handleSubmit(async (data) => {
+                                setIsLoading(true);
+                                handleCreateProduct(await createPayload(data));
                             })}
                             className="space-y-8"
                         >
@@ -117,7 +185,7 @@ const NewProductTemplate = () => {
                                 />
                                 <FormField
                                     control={form.control}
-                                    name="metadata.origin"
+                                    name="origin_country"
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel>Xuất xứ</FormLabel>
@@ -171,24 +239,33 @@ const NewProductTemplate = () => {
                                     setCategories={setCategories}
                                 />
                             </div>
-                            <ImageUpload
-                                multiple
-                                files={files}
-                                setFiles={setFiles}
+                            <div className="grid grid-cols-2 gap-4">
+                                <ImageUpload
+                                    files={thumbnail}
+                                    setFiles={setThumbnail}
+                                    label="Thumbnail"
+                                    description="Ảnh đại diện của sản phẩm"
+                                />
+                                <ImageUpload
+                                    multiple
+                                    files={images}
+                                    setFiles={setImages}
+                                    label="Hỉnh ảnh sản phẩm"
+                                    description="Ảnh mô tả sản phẩm"
+                                />
+                            </div>
+                            <TextEditor
+                                description={description}
+                                setDescription={setDescription}
                             />
-                            <TextEditor />
 
-                            <Button type="submit">Submit</Button>
+                            <Button type="submit">Tạo mới</Button>
                         </form>
                     </Form>
                 </CardContent>
             </Card>
         </Layout>
     );
-};
-
-const createPayload = () => {
-    return;
 };
 
 export default NewProductTemplate;

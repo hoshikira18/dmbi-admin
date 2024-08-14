@@ -50,4 +50,5 @@ export const uploadFiles = async (files) => {
             return await uploadFile(file);
         })
     );
+    return urls;
 };
