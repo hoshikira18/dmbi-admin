@@ -1,7 +1,15 @@
 import { set } from 'react-hook-form';
-import { FormField, FormItem } from '../ui/form';
+import { FormField, FormItem, FormLabel } from '../ui/form';
 import { useEffect, useState } from 'react';
-const ImageUpload = ({ multiple = false, files, setFiles }) => {
+import { Input } from '../ui/input';
+import TooltipComponent from './tooltip';
+const ImageUpload = ({
+    multiple = false,
+    files,
+    setFiles,
+    label = 'Hình ảnh',
+    description = '',
+}) => {
     const [preview, setPreview] = useState([]);
 
     useEffect(() => {
@@ -25,9 +33,9 @@ const ImageUpload = ({ multiple = false, files, setFiles }) => {
                 name={`image${multiple ? 's' : ''}`}
                 render={({ field }) => (
                     <FormItem>
-                        <label htmlFor={`image${multiple ? 's' : ''}`}>
-                            Hình ảnh
-                        </label>
+                        <TooltipComponent content={description}>
+                            <FormLabel>{label}</FormLabel>
+                        </TooltipComponent>
                         <input
                             id={`image${multiple ? 's' : ''}`}
                             type="file"
@@ -39,18 +47,33 @@ const ImageUpload = ({ multiple = false, files, setFiles }) => {
                     </FormItem>
                 )}
             />
-            <div className="flex flex-wrap gap-4">
-                {files &&
-                    preview.map((image) => (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                            key={image}
-                            src={image}
-                            alt="Preview"
-                            className="w-full rounded-lg border border-gray-300 object-cover"
-                        />
-                    ))}
-            </div>
+            {multiple ? (
+                <div className="grid grid-cols-6 gap-4">
+                    {files &&
+                        preview.map((image) => (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                                key={image}
+                                src={image}
+                                alt="Preview"
+                                className="w-full rounded-lg border border-gray-300 object-cover"
+                            />
+                        ))}
+                </div>
+            ) : (
+                <div className="flex flex-wrap gap-4">
+                    {files &&
+                        preview.map((image) => (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                                key={image}
+                                src={image}
+                                alt="Preview"
+                                className="w-full rounded-lg border border-gray-300 object-cover"
+                            />
+                        ))}
+                </div>
+            )}
         </div>
     );
 };
