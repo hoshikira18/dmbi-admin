@@ -83,7 +83,15 @@ const ProductPageTemplate = () => {
                                         {product.collection?.title}
                                     </TableCell>
                                     <TableCell>
-                                        <Badge>{product.status}</Badge>
+                                        <Badge
+                                            className={`${
+                                                product.status === 'draft'
+                                                    ? 'bg-yellow-500'
+                                                    : 'bg-green-500'
+                                            }`}
+                                        >
+                                            {product.status}
+                                        </Badge>
                                     </TableCell>
                                     <TableCell>
                                         {product.metadata?.price || 0}
