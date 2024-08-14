@@ -77,7 +77,7 @@ const PartnersTemplate = () => {
                                         <TableHead className="w-1/4 max-w-[150px]">
                                             Tên
                                         </TableHead>
-                                        <TableHead className="w-1/2">
+                                        <TableHead className="w-1/2 min-w-[100px] truncate">
                                             Ảnh
                                         </TableHead>
                                         <TableHead className="w-1/5"></TableHead>
