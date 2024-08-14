@@ -3,8 +3,6 @@ import DialogComponent from '@/components/common/dialog';
 import ImageUpload from '@/components/common/image-upload';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
 import { uploadFiles } from '@/lib/utils';
 import { PencilLineIcon } from 'lucide-react';
