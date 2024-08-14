@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { MultiSelect } from 'react-multi-select-component';
-import { FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { useAdminProductCategories } from 'medusa-react';
 
 const CategoriesSelector = ({ categories, setCategories }) => {
@@ -15,7 +14,7 @@ const CategoriesSelector = ({ categories, setCategories }) => {
     }));
 
     return (
-        <div className="z-50 space-y-2">
+        <div className="z-[1000] space-y-2">
             <label className="text-sm font-semibold">Danh mục</label>
             <MultiSelect
                 options={options}
