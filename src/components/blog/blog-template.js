@@ -42,20 +42,26 @@ const BlogTemplate = () => {
     };
     return (
         <Layout>
-            <Link href="/blog/new" className="w-full">
-                <button className="btn btn-primary w-full">
-                    <PlusCircle size={20} />
-                    Bài viết mới
-                </button>
-            </Link>
             {isLoading ? (
                 <div className="flex h-screen items-center justify-center">
                     <Spinner />
                 </div>
             ) : (
                 <Card>
-                    <CardHeader className="">
-                        <CardTitle>Bài viết</CardTitle>
+                    <CardHeader>
+                        <div className="flex justify-between">
+                            <div>
+                                <CardTitle>Bài viết</CardTitle>
+                            </div>
+                            <div>
+                                <Link href="/blog/new" className="w-full">
+                                    <button className="btn btn-outline btn-primary">
+                                        <PlusCircle size={20} />
+                                        Tạo bài viết mới
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
                     </CardHeader>
                     <CardContent>
                         <Table>

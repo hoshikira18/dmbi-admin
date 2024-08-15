@@ -14,7 +14,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import { formatDate } from '@/lib/utils';
-import { CirclePlus, Ellipsis } from 'lucide-react';
+import { CirclePlus, Ellipsis, PlusCircle } from 'lucide-react';
 import CategoryItemOptions from '@/components/category/category-item-option';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -40,9 +40,9 @@ const CategoriesTemplate = () => {
                                 className="inline-flex text-right"
                                 title="Tạo mới danh mục"
                                 triggerButton={
-                                    <button className="btn bg-green-500 text-primary-foreground hover:bg-green-400">
-                                        <CirclePlus />
-                                        Danh mục mới
+                                    <button className="btn btn-outline btn-primary">
+                                        <PlusCircle size={24} />
+                                        Tạo danh mục mới
                                     </button>
                                 }
                                 size="md"

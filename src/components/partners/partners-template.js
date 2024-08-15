@@ -52,7 +52,7 @@ const PartnersTemplate = () => {
                         triggerButton={
                             <button className="btn btn-outline btn-primary">
                                 <PlusCircle size={20} />
-                                Thêm đối tác
+                                Thêm đối tác mới
                             </button>
                         }
                         size="md"
@@ -71,13 +71,13 @@ const PartnersTemplate = () => {
                             <Table>
                                 <TableHeader>
                                     <TableRow>
-                                        <TableHead className="w-1/15">
+                                        <TableHead className="w-[10px]">
                                             STT
                                         </TableHead>
-                                        <TableHead className="w-1/4 max-w-[150px]">
+                                        <TableHead className="w-1/4 min-w-[150px]">
                                             Tên
                                         </TableHead>
-                                        <TableHead className="w-1/2 min-w-[100px] truncate">
+                                        <TableHead className="w-4/5 hidden md:block lg:flex items-center">
                                             Ảnh
                                         </TableHead>
                                         <TableHead className="w-1/5"></TableHead>
@@ -87,17 +87,17 @@ const PartnersTemplate = () => {
                                     {data?.length > 0 &&
                                         data.map((partner, index) => (
                                             <TableRow key={partner.id}>
-                                                <TableCell className="w-1/15">
+                                                <TableCell className="">
                                                     {index + 1}
                                                 </TableCell>
-                                                <TableCell className="w-1/4 max-w-[150px] min-w-[150px] font-medium">
+                                                <TableCell className="w-1/4 min-w-[150px] font-medium">
                                                     {partner.name}
                                                 </TableCell>
-                                                <TableCell className="w-1/2">
+                                                <TableCell className="w-4/5 hidden md:block lg:flex items-center">
                                                     <img
                                                         src={partner.image_url}
                                                         alt={partner.name}
-                                                        className="h-1/4 min-h-[100px] max-h-[350px] min-w-[150px] w-full border-2 object-cover"
+                                                        className="h-1/4 min-h-[100px] max-h-[350px] w-full border-2 object-cover"
                                                     />
                                                 </TableCell>
                                                 <TableCell className="text-right">
