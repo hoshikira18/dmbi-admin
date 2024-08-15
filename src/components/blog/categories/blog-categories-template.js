@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/table';
 import { useBlogCategories, useDeleteBlogCategory } from '@/api/blog/hook';
 import Spinner from '@/components/common/spinner';
-import { EyeIcon, Pencil, Trash } from 'lucide-react';
+import { EyeIcon, Pencil, PlusCircle, Trash } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import BlogCategoryEditCard from './edit-card';
 import Link from 'next/link';
@@ -45,21 +45,28 @@ const BlogCategoriesTemplate = () => {
 
     return (
         <Layout>
-            <DialogComponent
-                title={'Tạo mới danh mục'}
-                triggerButton={
-                    <button className="btn btn-primary">Tạo mới</button>
-                }
-                size="lg"
-            >
-                <NewBlogCategory />
-            </DialogComponent>
             {isLoading ? (
                 <Spinner />
             ) : (
                 <Card>
                     <CardHeader>
-                        <CardTitle>Danh mục bài viết</CardTitle>
+                        <div className="flex justify-between">
+                            <div>
+                                <CardTitle>Danh mục bài viết</CardTitle>
+                            </div>
+                            <DialogComponent
+                                title={'Tạo mới danh mục'}
+                                triggerButton={
+                                    <button className="btn btn-outline btn-primary">
+                                        <PlusCircle size={24} />
+                                        Danh mục bài viết mới
+                                    </button>
+                                }
+                                size="lg"
+                            >
+                                <NewBlogCategory />
+                            </DialogComponent>
+                        </div>
                     </CardHeader>
                     <CardContent>
                         <Table>
@@ -68,10 +75,10 @@ const BlogCategoriesTemplate = () => {
                                     <TableHead className="w-1/15">
                                         STT
                                     </TableHead>
-                                    <TableHead className="w-1/4 max-w-[150px]">
+                                    <TableHead className="w-1/4 min-w-[150px]">
                                         Tên danh mục
                                     </TableHead>
-                                    <TableHead className="w-1/2">
+                                    <TableHead className="w-4/5 hidden md:block lg:flex items-center">
                                         Hình ảnh
                                     </TableHead>
                                     <TableHead className="w-1/4 max-w-[200px] text-right"></TableHead>
@@ -87,21 +94,21 @@ const BlogCategoriesTemplate = () => {
                                                 {index + 1}
                                             </Link>
                                         </TableCell>
-                                        <TableCell className="w-1/4 max-w-[150px] pr-[30px]">
+                                        <TableCell className="w-1/4 min-w-[150px] font-medium">
                                             <Link
                                                 href={`/blog/categories/${category.id}`}
                                             >
                                                 {category.title}
                                             </Link>
                                         </TableCell>
-                                        <TableCell className="w-3/5">
+                                        <TableCell className="w-4/5 hidden md:block lg:flex items-center">
                                             <Link
                                                 href={`/blog/categories/${category.id}`}
                                             >
                                                 <img
                                                     src={category.image}
                                                     alt={category.name}
-                                                    className="h-1/4 max-h-[350px] min-h-[100px] w-full min-w-[150px] border-2 object-cover"
+                                                    className="h-1/4 max-h-[350px] min-h-[100px] w-full border-2 object-cover"
                                                 />
                                             </Link>
                                         </TableCell>

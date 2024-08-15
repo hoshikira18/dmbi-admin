@@ -13,7 +13,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { CirclePlus } from 'lucide-react';
+import { CirclePlus, PlusCircle } from 'lucide-react';
 import CollectionItemOptions from './collection-item-option';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { formatDate } from '@/lib/utils';
@@ -33,9 +33,9 @@ const CollectionsTemplate = () => {
                         <DialogComponent
                             title="Tạo mới danh mục"
                             triggerButton={
-                                <button className="btn bg-green-500 text-primary-foreground hover:bg-green-400">
-                                    <CirclePlus />
-                                    Bộ sưu tập mới
+                                <button className="btn btn-outline btn-primary">
+                                    <PlusCircle size={24} />
+                                    Tạo bộ sưu tập mới
                                 </button>
                             }
                             size="md"
