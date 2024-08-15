@@ -16,16 +16,17 @@ const DialogComponent = ({
     children,
 }) => {
     const dialogSize = {
-        sm: 'sm:max-w-[425px]',
-        md: 'md:max-w-screen-md',
-        lg: 'lg:max-w-screen-lg',
-        xl: 'xl:max-w-screen-xl',
+        sm: 'sm:max-w-[400px]',
+        md: 'sm:max-w-[500px] md:max-w-[600px]',
+        lg: 'md:max-w-[750px] lg:max-w-[900px]',
+        xl: 'lg:max-w-[1100px] xl:max-w-[1200px] ',
     };
+
     return (
         <Dialog>
             <DialogTrigger asChild>{triggerButton}</DialogTrigger>
             <DialogContent
-                className={`max-h-screen ${dialogSize[size]} overflow-auto`}
+                className={`max-h-screen ${dialogSize[size]} w-screen overflow-auto`}
             >
                 <DialogHeader>
                     <DialogTitle>{title}</DialogTitle>

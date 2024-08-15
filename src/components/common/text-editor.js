@@ -25,7 +25,11 @@ const FroalaEditor = dynamic(
     }
 );
 
-const TextEditor = ({ description = '', setDescription }) => {
+const TextEditor = ({
+    description = '',
+    setDescription,
+    label = 'Mô tả sản phẩm',
+}) => {
     const config = {
         events: {
             'image.beforeUpload': async function (images) {
@@ -56,7 +60,7 @@ const TextEditor = ({ description = '', setDescription }) => {
 
     return (
         <div className="space-y-2">
-            <Label htmlFor="description">Mô tả sản phẩm</Label>
+            <Label htmlFor="description">{label}</Label>
             <FroalaEditor
                 model={description}
                 tag="textarea"

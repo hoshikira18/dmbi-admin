@@ -2,116 +2,54 @@
 import { set, useForm } from 'react-hook-form';
 import { Layout } from '../layout';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Form, FormField, FormItem } from '../ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form';
 import { Input } from '../ui/input';
-import RequireLabel from '../common/require-label';
 import ImageUpload from '../common/image-upload';
 import { useState } from 'react';
-import { useCreatePost } from '@/api/blog/hook';
+import { useBlogCategories, useCreatePost } from '@/api/blog/hook';
 import { useToast } from '../ui/use-toast';
 import { uploadFile } from '@/lib/utils';
 import Spinner from '../common/spinner';
-import { uploadImageCloudinary } from '@/lib/cloudinary';
-import dynamic from 'next/dynamic';
+import { TextEditor } from '../common';
+
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '../ui/select';
 
 const NewPostTemplate = () => {
     const { toast } = useToast();
     const form = useForm({
         defaultValues: {
             title: '',
+            category_id: '',
             description: '',
-            content: '',
         },
     });
 
-    const FroalaEditorView = dynamic(
-        () => import('react-froala-wysiwyg/FroalaEditorView'),
-        { ssr: false }
-    );
-
-    const FroalaEditor = dynamic(
-        async () => {
-            const values = await Promise.all([
-                import('react-froala-wysiwyg'), // must be first import since we are doing values[0] in return
-                import('froala-editor/js/plugins.pkgd.min.js'),
-                import('froala-editor/css/froala_style.min.css'),
-                import('froala-editor/css/froala_editor.pkgd.min.css'),
-            ]);
-            return values[0];
-        },
-        {
-            loading: () => <p>LOADING!!!</p>,
-            ssr: false,
-        }
-    );
-
-    const TextEditor = ({ description = '', setDescription }) => {
-        const config = {
-            events: {
-                'image.beforeUpload': async function (images) {
-                    await uploadImageCloudinary(images)
-                        .then((data) => {
-                            // Insert the image into the editor
-                            this.image.insert(
-                                data.secure_url,
-                                false,
-                                null,
-                                this.image.get(),
-                                null
-                            );
-
-                            // Optionally add data attributes to the image
-                            const $img = this.image.get();
-                            $img.attr('data-id', data.public_id);
-                        })
-                        .catch((error) => {
-                            console.error('Image upload error:', error);
-                        });
-
-                    // Prevent the default image upload
-                    return false;
-                },
-            },
-        };
-
-        return (
-            <div className="space-y-2">
-                <FroalaEditor
-                    model={description}
-                    tag="textarea"
-                    config={config}
-                    onModelChange={(e) => {
-                        setDescription(e);
-                        console.log(e);
-                    }}
-                />
-            </div>
-        );
-    };
-
     const [files, setFiles] = useState([]);
-    const [isCreating, setIsCreating] = useState(false);
+    const [content, setContent] = useState('');
     const { mutate: createPost } = useCreatePost();
-    const handleCreatePost = ({ title, description, content, image }) => {
-        createPost(
-            {
-                title,
-                description,
-                content,
-                image,
+    const [isCreating, setIsCreating] = useState(false);
+    const { data: blogCategories, isLoading: isCategoriesLoading } =
+        useBlogCategories();
+
+    const handleCreatePost = (data) => {
+        createPost(data, {
+            onSuccess: () => {
+                setIsCreating(false);
+                form.reset();
+                setFiles([]);
+                toast({
+                    title: 'Tạo bài viết thành công',
+                });
             },
-            {
-                onSuccess: () => {
-                    setIsCreating(false);
-                    form.reset();
-                    setFiles([]);
-                    toast({
-                        title: 'Tạo bài viết thành công',
-                    });
-                },
-            }
-        );
+        });
     };
+
     return (
         <Layout>
             <Card>
@@ -126,36 +64,84 @@ const NewPostTemplate = () => {
                                     files={files}
                                     setFiles={setFiles}
                                 />
-                                <FormField
-                                    control={form.control}
-                                    name="title"
-                                    render={({ field }) => {
-                                        return (
+                                <div className="grid grid-cols-2 gap-4">
+                                    <FormField
+                                        control={form.control}
+                                        name="title"
+                                        render={({ field }) => {
+                                            return (
+                                                <FormItem>
+                                                    <FormLabel>
+                                                        Tiêu đề
+                                                    </FormLabel>
+                                                    <Input
+                                                        placeholder="Nhập tiêu đề"
+                                                        {...form.register(
+                                                            'title',
+                                                            {
+                                                                required: true,
+                                                            }
+                                                        )}
+                                                    />
+                                                </FormItem>
+                                            );
+                                        }}
+                                    />
+                                    <FormField
+                                        control={form.control}
+                                        name="category_id"
+                                        render={({ field }) => (
                                             <FormItem>
-                                                <RequireLabel
-                                                    label="Tiêu đề"
-                                                    required
-                                                />
-                                                <Input
-                                                    placeholder="Nhập tiêu đề"
-                                                    {...form.register('title', {
-                                                        required: true,
-                                                    })}
-                                                />
+                                                <FormLabel>Danh mục</FormLabel>
+                                                <Select
+                                                    onValueChange={
+                                                        field.onChange
+                                                    }
+                                                    defaultValue={field.value}
+                                                >
+                                                    <FormControl>
+                                                        <SelectTrigger>
+                                                            <SelectValue placeholder="Chọn danh mục bài viết" />
+                                                        </SelectTrigger>
+                                                    </FormControl>
+                                                    <SelectContent>
+                                                        {isCategoriesLoading ? (
+                                                            <SelectItem>
+                                                                Loading...
+                                                            </SelectItem>
+                                                        ) : (
+                                                            blogCategories.map(
+                                                                (category) => (
+                                                                    <SelectItem
+                                                                        key={
+                                                                            category.id
+                                                                        }
+                                                                        value={
+                                                                            category.id
+                                                                        }
+                                                                    >
+                                                                        {
+                                                                            category.title
+                                                                        }
+                                                                    </SelectItem>
+                                                                )
+                                                            )
+                                                        )}
+                                                    </SelectContent>
+                                                </Select>
                                             </FormItem>
-                                        );
-                                    }}
-                                />
+                                        )}
+                                    />
+                                </div>
                                 <FormField
                                     control={form.control}
                                     name="description"
                                     render={({ field }) => {
                                         return (
                                             <FormItem>
-                                                <RequireLabel
-                                                    label="Mô tả"
-                                                    required
-                                                />
+                                                <FormLabel>
+                                                    Mô tả ngắn
+                                                </FormLabel>
                                                 <Input
                                                     placeholder="Mô tả ngắn"
                                                     {...form.register(
@@ -175,11 +161,11 @@ const NewPostTemplate = () => {
                                     render={({ field }) => {
                                         return (
                                             <FormItem>
-                                                <RequireLabel
+                                                <TextEditor
+                                                    description={content}
+                                                    setDescription={setContent}
                                                     label="Nội dung"
-                                                    required
                                                 />
-                                                <TextEditor/>
                                             </FormItem>
                                         );
                                     }}
@@ -191,6 +177,7 @@ const NewPostTemplate = () => {
                                         await uploadFile(files).then((url) => {
                                             handleCreatePost({
                                                 ...data,
+                                                content: content,
                                                 image: url,
                                             });
                                         });
