@@ -9,7 +9,7 @@ import {
     FormMessage,
 } from '../ui/form';
 import { set, useForm } from 'react-hook-form';
-import { useAdminLogin } from 'medusa-react';
+import { useAdminGetSession, useAdminLogin } from 'medusa-react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '../ui/use-toast';
@@ -19,6 +19,10 @@ import Spinner from '../common/spinner';
 
 const LoginCard = () => {
     const router = useRouter();
+    const { user, isLoading } = useAdminGetSession();
+    if (user) {
+        router.push('/products');
+    }
     const { toast } = useToast();
     const [error, setError] = useState(false);
     const [isLoginLoading, setIsLoginLoading] = useState(false);
@@ -45,7 +49,7 @@ const LoginCard = () => {
                     setIsLoginLoading(false);
                     setError(false);
                     console.log('login success');
-                    router.push('/');
+                    router.push('/products');
                     toast({
                         title: 'Đăng nhập thành công',
                         description: 'Chào mừng bạn đến với DMB Industrial',

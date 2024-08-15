@@ -9,11 +9,8 @@ import {
     Package,
     Package2,
     Search,
-    ShoppingCart,
-    Users,
 } from 'lucide-react';
 
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -48,12 +45,12 @@ function Layout({ children }) {
     const handleLogout = () => {
         adminLogout.mutate(undefined, {
             onSuccess: () => {
-                router.push('/login');
+                window.location.href = '/';
             },
         });
     };
     if (!isLoading && !user) {
-        window.location.href = '/login';
+        window.location.href = '/';
     }
 
     if (isLoading) {
