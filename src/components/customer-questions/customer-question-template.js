@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/table';
 import { formatDate } from '@/lib/utils';
 import { check } from 'prettier';
+import { Trash } from 'lucide-react';
 
 const CustomerQuestionsTemplate = () => {
     const { data: customerQuestions } = useCustomerQuestions();
@@ -42,7 +43,6 @@ const CustomerQuestionsTemplate = () => {
                 <CardContent>
                     {
                         <Table id="questionTable">
-                            <TableCaption>All question</TableCaption>
                             <TableHeader>
                                 <TableRow>
                                     <TableHead className="w-1/15">STT</TableHead>
@@ -86,12 +86,12 @@ const CustomerQuestionsTemplate = () => {
                                         </TableCell>
                                         <TableCell className="w-1/20">
                                             <button
-                                                className="btn bg-blue-600"
+                                                className="btn btn-outline btn-error"
                                                 onClick={() => {
                                                     handleDelete(question.id);
                                                 }}
                                             >
-                                                Delete
+                                                <Trash size={20} />
                                             </button>
                                         </TableCell>
                                     </TableRow>

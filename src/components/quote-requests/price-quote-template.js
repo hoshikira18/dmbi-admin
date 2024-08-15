@@ -15,6 +15,7 @@ import {
     TableRow,
 } from '../ui/table';
 import { formatDate } from '@/lib/utils';
+import { Trash } from 'lucide-react';
 
 const PriceQuoteTemplate = () => {
     const { data: priceRequests } = usePriceRequests();
@@ -34,7 +35,6 @@ const PriceQuoteTemplate = () => {
                 <CardContent>
                     {
                         <Table>
-                            <TableCaption>All Price Quote</TableCaption>
                             <TableHeader>
                                 <TableRow>
                                     <TableHead className="w-1/15">
@@ -86,12 +86,12 @@ const PriceQuoteTemplate = () => {
                                         </TableCell>
                                         <TableCell>
                                             <button
-                                                className="btn bg-blue-600"
+                                                className="btn btn-outline btn-error"
                                                 onClick={() => {
                                                     handleDelete(request.id);
                                                 }}
                                             >
-                                                Delete
+                                                <Trash size={20} />
                                             </button>
                                         </TableCell>
                                     </TableRow>

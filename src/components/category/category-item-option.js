@@ -15,6 +15,17 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+  } from "@/components/ui/alert-dialog"
 import Link from 'next/link';
 import { useAdminDeleteProductCategory } from 'medusa-react';
 import DialogComponent from '../common/dialog';
@@ -35,17 +46,7 @@ const CategoryItemOptions = ({ id }) => {
                         Chi tiết
                     </div>
                 </Link>
-                <DialogComponent
-                    title={"Bạn có muốn xóa danh mục này?"}
-                    description={"⚠️Thao tác này không thể hoàn lại!"}
-                    triggerButton={
-                        <div className="w-1/1 mx-auto mt-[2px] h-[30px] rounded bg-red-400 py-[4px] text-center align-middle">
-                            <button>Xóa</button>
-                        </div>
-                    }
-                >
-                    <CategoryDeleteButton id={id} />
-                </DialogComponent>
+                <CategoryDeleteButton id={id} />
             </DropdownMenuContent>
         </DropdownMenu>
     );
