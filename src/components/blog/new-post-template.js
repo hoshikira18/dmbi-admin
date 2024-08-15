@@ -2,52 +2,54 @@
 import { set, useForm } from 'react-hook-form';
 import { Layout } from '../layout';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Form, FormField, FormItem, FormLabel } from '../ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel } from '../ui/form';
 import { Input } from '../ui/input';
-import RequireLabel from '../common/require-label';
 import ImageUpload from '../common/image-upload';
 import { useState } from 'react';
-import { useCreatePost } from '@/api/blog/hook';
+import { useBlogCategories, useCreatePost } from '@/api/blog/hook';
 import { useToast } from '../ui/use-toast';
 import { uploadFile } from '@/lib/utils';
 import Spinner from '../common/spinner';
 import { TextEditor } from '../common';
-import { Label } from '../ui/label';
+
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '../ui/select';
 
 const NewPostTemplate = () => {
     const { toast } = useToast();
     const form = useForm({
         defaultValues: {
             title: '',
+            category_id: '',
             description: '',
-            content: '',
         },
     });
 
     const [files, setFiles] = useState([]);
     const [content, setContent] = useState('');
-    const [isCreating, setIsCreating] = useState(false);
     const { mutate: createPost } = useCreatePost();
-    const handleCreatePost = ({ title, description, content, image }) => {
-        createPost(
-            {
-                title,
-                description,
-                content,
-                image,
+    const [isCreating, setIsCreating] = useState(false);
+    const { data: blogCategories, isLoading: isCategoriesLoading } =
+        useBlogCategories();
+
+    const handleCreatePost = (data) => {
+        createPost(data, {
+            onSuccess: () => {
+                setIsCreating(false);
+                form.reset();
+                setFiles([]);
+                toast({
+                    title: 'Tạo bài viết thành công',
+                });
             },
-            {
-                onSuccess: () => {
-                    setIsCreating(false);
-                    form.reset();
-                    setFiles([]);
-                    toast({
-                        title: 'Tạo bài viết thành công',
-                    });
-                },
-            }
-        );
+        });
     };
+
     return (
         <Layout>
             <Card>
@@ -62,23 +64,75 @@ const NewPostTemplate = () => {
                                     files={files}
                                     setFiles={setFiles}
                                 />
-                                <FormField
-                                    control={form.control}
-                                    name="title"
-                                    render={({ field }) => {
-                                        return (
+                                <div className="grid grid-cols-2 gap-4">
+                                    <FormField
+                                        control={form.control}
+                                        name="title"
+                                        render={({ field }) => {
+                                            return (
+                                                <FormItem>
+                                                    <FormLabel>
+                                                        Tiêu đề
+                                                    </FormLabel>
+                                                    <Input
+                                                        placeholder="Nhập tiêu đề"
+                                                        {...form.register(
+                                                            'title',
+                                                            {
+                                                                required: true,
+                                                            }
+                                                        )}
+                                                    />
+                                                </FormItem>
+                                            );
+                                        }}
+                                    />
+                                    <FormField
+                                        control={form.control}
+                                        name="category_id"
+                                        render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel>Tiêu đề</FormLabel>
-                                                <Input
-                                                    placeholder="Nhập tiêu đề"
-                                                    {...form.register('title', {
-                                                        required: true,
-                                                    })}
-                                                />
+                                                <FormLabel>Danh mục</FormLabel>
+                                                <Select
+                                                    onValueChange={
+                                                        field.onChange
+                                                    }
+                                                    defaultValue={field.value}
+                                                >
+                                                    <FormControl>
+                                                        <SelectTrigger>
+                                                            <SelectValue placeholder="Chọn danh mục bài viết" />
+                                                        </SelectTrigger>
+                                                    </FormControl>
+                                                    <SelectContent>
+                                                        {isCategoriesLoading ? (
+                                                            <SelectItem>
+                                                                Loading...
+                                                            </SelectItem>
+                                                        ) : (
+                                                            blogCategories.map(
+                                                                (category) => (
+                                                                    <SelectItem
+                                                                        key={
+                                                                            category.id
+                                                                        }
+                                                                        value={
+                                                                            category.id
+                                                                        }
+                                                                    >
+                                                                        {
+                                                                            category.title
+                                                                        }
+                                                                    </SelectItem>
+                                                                )
+                                                            )
+                                                        )}
+                                                    </SelectContent>
+                                                </Select>
                                             </FormItem>
-                                        );
-                                    }}
-                                />
+                                        )}
+                                    />
+                                </div>
                                 <FormField
                                     control={form.control}
                                     name="description"
@@ -123,6 +177,7 @@ const NewPostTemplate = () => {
                                         await uploadFile(files).then((url) => {
                                             handleCreatePost({
                                                 ...data,
+                                                content: content,
                                                 image: url,
                                             });
                                         });

@@ -13,11 +13,6 @@ import {
 import NavItem from './nav-item';
 const navigationItems = [
     {
-        name: 'Trang chủ',
-        icon: Home,
-        href: '/',
-    },
-    {
         name: 'Sản phẩm',
         icon: Package2,
         href: '/products',
