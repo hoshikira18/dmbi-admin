@@ -1,6 +1,7 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import {
+    Banana,
     Home,
     LineChart,
     Monitor,
@@ -12,6 +13,11 @@ import {
 } from 'lucide-react';
 import NavItem from './nav-item';
 const navigationItems = [
+    {
+        name: 'Banner',
+        icon: Banana,
+        href: '/banners',
+    },
     {
         name: 'Sản phẩm',
         icon: Package2,
