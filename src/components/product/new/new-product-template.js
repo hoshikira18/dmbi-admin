@@ -18,33 +18,43 @@ import { useState } from 'react';
 import ImageUpload from '@/components/common/image-upload';
 import TextEditor from '@/components/common/text-editor';
 import { useAdminCreateProduct } from 'medusa-react';
-import { formatHandle, uploadFile, uploadFiles } from '@/lib/utils';
+import {
+    formatHandle,
+    formatNumber,
+    uploadFile,
+    uploadFiles,
+} from '@/lib/utils';
 import { useToast } from '@/components/ui/use-toast';
 import Spinner from '@/components/common/spinner';
 import { ToastAction } from '@/components/ui/toast';
 import { Link } from 'next/link';
 import { Label } from '@/components/ui/label';
+import ProductTagsSelector from './product-tags-selector';
 
 const NewProductTemplate = () => {
     // Image state
     const { toast } = useToast();
     const [images, setImages] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
     const [thumbnail, setThumbnail] = useState([]);
+    const [tags, setTags] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [categories, setCategories] = useState([]);
     const [description, setDescription] = useState('');
     const [specifications, setSpecifications] = useState([]);
+
     const form = useForm({
         defaultValues: {
             title: '',
             origin_country: '',
             collection_id: '',
+            tags: '',
             metadata: {
                 guarantee: '',
                 technology: '',
                 inventory: '',
                 model: '',
                 uses: '',
+                price: '',
             },
         },
     });
@@ -57,6 +67,17 @@ const NewProductTemplate = () => {
             discountable: false,
             description: description,
             collection_id: data.collection_id,
+            tags: data.tags
+                .split(',')
+                .map((tag) => ({
+                    value: tag.trim(),
+                }))
+                .concat(
+                    tags.map((tag) => ({
+                        value: tag.label,
+                        id: tag.value,
+                    }))
+                ),
             categories: categories.map((c) => {
                 return {
                     id: c.value,
@@ -69,6 +90,7 @@ const NewProductTemplate = () => {
             metadata: {
                 uses: data.metadata.uses,
                 model: data.metadata.model,
+                price: data.metadata.price,
                 guarantee: data.metadata.guarantee,
                 technology: data.metadata.technology,
                 inventory: data.metadata.inventory,
@@ -225,6 +247,45 @@ const NewProductTemplate = () => {
                                                 <Input
                                                     type="number"
                                                     placeholder="100"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <ProductTagsSelector
+                                    tags={tags}
+                                    setTags={setTags}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="tags"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Tags</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    placeholder="Sản phẩm bán chạy, Hàng mới về,..."
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="metadata.price"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Giá</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    type="number"
+                                                    placeholder={formatNumber(
+                                                        6888000
+                                                    )}
                                                     {...field}
                                                 />
                                             </FormControl>

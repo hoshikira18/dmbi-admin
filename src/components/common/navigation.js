@@ -8,6 +8,7 @@ import {
     Package,
     Package2,
     Pen,
+    Store,
     User2,
     Users,
 } from 'lucide-react';
@@ -57,6 +58,11 @@ const navigationItems = [
         name: 'Câu hỏi của khách hàng',
         icon: Users,
         href: '/customer-questions',
+    },
+    {
+        name: 'Quản lý cửa hàng',
+        icon: Store,
+        href: '/store',
     },
 ];
 const Navigation = () => {
