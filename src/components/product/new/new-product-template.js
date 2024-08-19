@@ -78,11 +78,7 @@ const NewProductTemplate = () => {
                         id: tag.value,
                     }))
                 ),
-            categories: categories.map((c) => {
-                return {
-                    id: c.value,
-                };
-            }),
+            categories: categories,
             handle: formatHandle(data.title),
             images: await uploadFiles(images),
             origin_country: data.origin_country,
