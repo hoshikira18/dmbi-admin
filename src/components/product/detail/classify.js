@@ -1,9 +1,9 @@
 import React from 'react';
 import { EditClassify } from '../edit';
 import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
 
-const Classify = ({ collection, categories, handleUpdate }) => {
-    console.log(collection, categories);
+const Classify = ({ collection, categories, tags, handleUpdate }) => {
     return (
         <div>
             <h2 className="my-2 flex items-center text-xl font-semibold">
@@ -11,6 +11,7 @@ const Classify = ({ collection, categories, handleUpdate }) => {
                     handleUpdate={handleUpdate}
                     collection={collection}
                     categories={categories}
+                    tags={tags}
                 />
                 Phân loại
             </h2>
@@ -26,6 +27,16 @@ const Classify = ({ collection, categories, handleUpdate }) => {
                 <div>
                     <Label>Bộ sản phẩm: </Label>
                     <span>{collection?.title}</span>
+                </div>
+                <div>
+                    <Label>Tags: </Label>
+                    <span className="space-x-2">
+                        {tags?.map((tag) => (
+                            <Badge key={tag.id} className={'bg-lime-600'}>
+                                {tag.value}
+                            </Badge>
+                        ))}
+                    </span>
                 </div>
             </div>
         </div>

@@ -20,7 +20,6 @@ const ProductDetailTemplate = ({ params }) => {
     const { toast } = useToast();
     const { product, isLoading } = useAdminProduct(params.id);
     const updateProduct = useAdminUpdateProduct(params.id);
-    console.log(product);
 
     const handleUpdate = (data) => {
         updateProduct.mutate(data, {
@@ -72,6 +71,7 @@ const ProductDetailTemplate = ({ params }) => {
                             <Classify
                                 collection={product?.collection}
                                 categories={product?.categories}
+                                tags={product?.tags}
                                 handleUpdate={handleUpdate}
                             />
                         </div>

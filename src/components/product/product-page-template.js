@@ -15,12 +15,6 @@ import {
 } from '../ui/table';
 import { useAdminProducts } from 'medusa-react';
 import CategoriesCollapse from './categories-collapse';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
 import ProductItemOptions from './product-item-option';
 import { Badge } from '../ui/badge';
 import Spinner from '../common/spinner';

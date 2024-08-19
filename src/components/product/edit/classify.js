@@ -2,21 +2,23 @@
 import DialogComponent from '@/components/common/dialog';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { PencilLineIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import CollectionSelector from '../new/collection-selector';
 import CategoriesSelector from '../new/categories-selector';
 import { useToast } from '@/components/ui/use-toast';
+import ProductTagsSelector from '../new/product-tags-selector';
+import { Combobox } from '@/components/common';
 
 const EditClassify = ({
     handleUpdate,
     collection,
     categories: oldCategories,
+    tags: oldTags,
 }) => {
     const { toast } = useToast();
+    const [tags, setTags] = useState([]);
     const [categories, setCategories] = useState([]);
     const form = useForm({
         defaultValues: {
@@ -27,9 +29,8 @@ const EditClassify = ({
     const createPayload = (data) => {
         return {
             collection_id: data.collection_id,
-            categories: categories.map((c) => ({
-                id: c.value,
-            })),
+            categories: categories,
+            tags: tags,
         };
     };
 
@@ -43,7 +44,7 @@ const EditClassify = ({
             title="Đổi tên sản phẩm"
             size="lg"
         >
-            <div className="min-h-[40vh] space-y-2">
+            <div className="space-y-2">
                 <Form {...form}>
                     <form
                         onSubmit={form.handleSubmit((data) => {
@@ -57,8 +58,14 @@ const EditClassify = ({
                         <CategoriesSelector
                             categories={categories}
                             setCategories={setCategories}
+                            oldCategories={oldCategories}
                         />
                         <CollectionSelector form={form} />
+                        <ProductTagsSelector
+                            tags={tags}
+                            setTags={setTags}
+                            oldTags={oldTags}
+                        />
                         <Button type="submit" size="lg" className="col-span-2">
                             Lưu
                         </Button>
