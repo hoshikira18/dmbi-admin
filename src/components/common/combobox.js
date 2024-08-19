@@ -37,15 +37,17 @@ const Combobox = ({ list, setList, oldList }) => {
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className="justify-start overflow-hidden"
+                    className="justify-start pr-4"
                 >
                     <ChevronsUpDown className="mr-2 h-4 w-4 shrink-0 opacity-50" />
-                    {value.length > 0
-                        ? list
-                              .filter((item) => value.includes(item.value))
-                              .map((item) => item.value)
-                              .join(', ')
-                        : 'Chọn mục...'}
+                    <span className="truncate">
+                        {value.length > 0
+                            ? list
+                                  .filter((item) => value.includes(item.value))
+                                  .map((item) => item.value)
+                                  .join(', ')
+                            : 'Chọn mục...'}
+                    </span>
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="p-0">
