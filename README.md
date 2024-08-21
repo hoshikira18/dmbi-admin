@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DMB Industrial Company Admin Website
 
-## Getting Started
+The Admin website that manages the DMBI's products and their information. 
 
-First, run the development server:
+## Built With
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* [NextJS](https://nextjs.org/)
+* [TailwindCSS](https://tailwindcss.com/)
+* HTML/CSS
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contributors
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+* **VietNT** - *FrontEnd Developer* - [VietNT](https://github.com/vietnt1904)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Authors
 
-## Learn More
+* **Hoshikira** - *PM/FullStack Developer* - [Hoshikira](https://github.com/hoshikira18)
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy - Vercel - [DMBI Admin](https://dmbi-admin.vercel.app/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![image](https://github.com/user-attachments/assets/e829080d-2216-4ade-b450-c9e76322e317)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
