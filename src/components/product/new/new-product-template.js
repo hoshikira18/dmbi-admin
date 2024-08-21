@@ -74,7 +74,7 @@ const NewProductTemplate = () => {
                 }))
                 .concat(
                     tags.map((tag) => ({
-                        value: tag.label,
+                        value: tag.label || '',
                         id: tag.value,
                     }))
                 ),
