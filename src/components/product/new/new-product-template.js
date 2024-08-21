@@ -60,6 +60,34 @@ const NewProductTemplate = () => {
     });
 
     const createPayload = async (data) => {
+        const newTags =
+            data.tags &&
+            data.tags.split(',').map((tag) => ({
+                value: tag.trim(),
+            }));
+
+        const tagValue =
+            newTags.length > 0
+                ? newTags.concat(
+                      tags.map((tag) => {
+                          if (tag.value.length === 0) {
+                              return;
+                          }
+                          return {
+                              id: tag.id,
+                              value: tag.value,
+                          };
+                      })
+                  )
+                : tags.map((tag) => {
+                      if (tag.value.length === 0) {
+                          return;
+                      }
+                      return {
+                          id: tag.id,
+                          value: tag.value,
+                      };
+                  });
         return {
             title: data.title,
             status: 'published',
@@ -67,17 +95,7 @@ const NewProductTemplate = () => {
             discountable: false,
             description: description,
             collection_id: data.collection_id,
-            tags: data.tags
-                .split(',')
-                .map((tag) => ({
-                    value: tag.trim(),
-                }))
-                .concat(
-                    tags.map((tag) => ({
-                        value: tag.label || '',
-                        id: tag.value,
-                    }))
-                ),
+            tags: tagValue,
             categories: categories,
             handle: formatHandle(data.title),
             images: await uploadFiles(images),
@@ -134,7 +152,7 @@ const NewProductTemplate = () => {
                         <form
                             onSubmit={form.handleSubmit(async (data) => {
                                 setIsLoading(true);
-                                handleCreateProduct(await createPayload(data));
+                                console.log(await createPayload(data));
                             })}
                             className="space-y-8"
                         >
