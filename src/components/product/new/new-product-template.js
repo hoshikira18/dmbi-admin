@@ -152,7 +152,7 @@ const NewProductTemplate = () => {
                         <form
                             onSubmit={form.handleSubmit(async (data) => {
                                 setIsLoading(true);
-                                console.log(await createPayload(data));
+                                handleCreateProduct(await createPayload(data));
                             })}
                             className="space-y-8"
                         >
