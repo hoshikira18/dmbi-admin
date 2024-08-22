@@ -11,6 +11,8 @@ import { useForm } from 'react-hook-form';
 import ImageUpload from '../common/image-upload';
 import EditStore from './edit-store';
 import EditImage from './edit-image';
+import EditStandee from './edit-standee';
+import { useToast } from '../ui/use-toast';
 
 const FroalaEditorView = dynamic(
     () => import('react-froala-wysiwyg/FroalaEditorView'),
@@ -21,8 +23,14 @@ const { Layout } = require('../layout');
 
 const StoreTemplate = () => {
     const form = useForm();
+    const { toast } = useToast();
+
     const { store, isLoading } = useAdminStore();
+
     const updateStore = useAdminUpdateStore();
+
+    console.log(store);
+
     const handleUpdate = (data) => {
         updateStore.mutate(data, {
             onSuccess: () => {
@@ -68,18 +76,31 @@ const StoreTemplate = () => {
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="grid grid-cols-2 gap-10">
-                            <div className="col-span-2 flex items-center lg:col-span-1">
-                                <EditImage handleUpdate={handleUpdate} />
-                                <img
-                                    src={store?.metadata?.image}
-                                    alt="about-image"
-                                />
+                        <div>
+                            <div className="grid grid-cols-2 gap-10 border-b-2 pb-5">
+                                <div className="col-span-2 flex items-center px-20 lg:col-span-1">
+                                    <EditImage handleUpdate={handleUpdate} />
+                                    <img
+                                        src={store?.metadata?.image}
+                                        alt="about-image"
+                                    />
+                                </div>
+                                <div className="col-span-2 px-5 lg:col-span-1">
+                                    <Label>Giới thiệu: </Label>
+                                    <FroalaEditorView
+                                        model={store?.metadata?.about}
+                                    />
+                                </div>
                             </div>
-                            <div className="col-span-2 lg:col-span-1">
-                                <Label>Giới thiệu: </Label>
-                                <FroalaEditorView
-                                    model={store?.metadata?.about}
+                            <div className="space-y-5 py-5">
+                                <div className="flex items-center space-x-1">
+                                    <EditStandee handleUpdate={handleUpdate} />
+                                    <CardTitle>Standee</CardTitle>
+                                </div>
+                                <img
+                                    src={store?.metadata?.standee}
+                                    alt="standee"
+                                    className="w-1/4"
                                 />
                             </div>
                         </div>
