@@ -7,3 +7,4 @@ export { default as TextEditor } from './text-editor';
 export { default as RequireLabel } from './require-label';
 export { default as MedusaClient } from './MedusaClient';
 export { default as Combobox } from './combobox';
+export { default as MultipleInput } from './multiple-input';
