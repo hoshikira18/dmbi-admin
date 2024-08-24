@@ -6,13 +6,11 @@ import { DialogComponent, Spinner } from '../common';
 import { Label } from '../ui/label';
 import { PencilLineIcon } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import { Form } from '../ui/form';
-import { useForm } from 'react-hook-form';
-import ImageUpload from '../common/image-upload';
 import EditStore from './edit-store';
 import EditImage from './edit-image';
 import EditStandee from './edit-standee';
 import { useToast } from '../ui/use-toast';
+import EditAddress from './edit-address';
 
 const FroalaEditorView = dynamic(
     () => import('react-froala-wysiwyg/FroalaEditorView'),
@@ -22,7 +20,6 @@ const FroalaEditorView = dynamic(
 const { Layout } = require('../layout');
 
 const StoreTemplate = () => {
-    const form = useForm();
     const { toast } = useToast();
 
     const { store, isLoading } = useAdminStore();
@@ -92,7 +89,7 @@ const StoreTemplate = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="space-y-5 py-5">
+                            <div className="space-y-5 border-b-2 py-5">
                                 <div className="flex items-center space-x-1">
                                     <EditStandee handleUpdate={handleUpdate} />
                                     <CardTitle>Standee</CardTitle>
@@ -100,8 +97,32 @@ const StoreTemplate = () => {
                                 <img
                                     src={store?.metadata?.standee}
                                     alt="standee"
-                                    className="w-1/4"
+                                    className="mx-auto w-1/4"
                                 />
+                            </div>
+                            <div className="space-y-5 py-10">
+                                <div className="flex items-center space-x-1">
+                                    <CardTitle>Thông tin chung</CardTitle>
+                                </div>
+                                <div>
+                                    <div>
+                                        <EditAddress />
+                                        <Label className="text-lg">
+                                            Địa chỉ
+                                        </Label>
+                                    </div>
+                                    {store?.metadata?.address?.map((a, i) => {
+                                        return (
+                                            <div key={index}>
+                                                <Label>Địa chỉ {i}: </Label>
+                                                <div>
+                                                    <p>{a.title}</p>
+                                                    <p>{a.value}</p>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
                             </div>
                         </div>
                     </CardContent>
