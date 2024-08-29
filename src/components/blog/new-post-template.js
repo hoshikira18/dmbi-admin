@@ -110,7 +110,7 @@ const NewPostTemplate = () => {
                                                                 Loading...
                                                             </SelectItem>
                                                         ) : (
-                                                            blogCategories.map(
+                                                            blogCategories?.map(
                                                                 (category) => (
                                                                     <SelectItem
                                                                         key={

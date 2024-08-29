@@ -6,9 +6,9 @@ import { DialogComponent, MultipleInput } from '../common';
 import { PencilLineIcon } from 'lucide-react';
 import { Button } from '../ui/button';
 
-const EditAddress = ({ handleUpdate }) => {
+const EditAddress = ({ handleUpdate, store }) => {
     const { toast } = useToast();
-    const [address, setAddress] = useState();
+    const [address, setAddress] = useState(store?.metadata?.address);
 
     return (
         <DialogComponent
@@ -20,13 +20,17 @@ const EditAddress = ({ handleUpdate }) => {
             title="Đổi địa chỉ"
             size="lg"
         >
-            <MultipleInput setData={setAddress} />
+            <MultipleInput data={address} setData={setAddress} />
             <Button
                 type="button"
                 size="lg"
                 className="mt-5 w-full"
                 onClick={() => {
-                    console.log(address);
+                    handleUpdate({
+                        metadata: {
+                            address: address,
+                        },
+                    });
                 }}
             >
                 Lưu
