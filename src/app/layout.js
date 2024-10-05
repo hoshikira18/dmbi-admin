@@ -13,7 +13,8 @@ const MedusaClient = ({ children }) => {
         <MedusaProvider
             queryClientProviderProps={{ client: queryClient }}
             baseUrl={
-                process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:9000'
+                process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL ||
+                'http://localhost:9000'
             }
         >
             {children}
