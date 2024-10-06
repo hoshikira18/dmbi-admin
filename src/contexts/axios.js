@@ -1,11 +1,8 @@
 import axios from 'axios';
 
 import { getAuth, useToken } from '@/store/auth-store';
-import { QueryClient } from '@tanstack/react-query';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
-    ? `${process.env.NEXT_PUBLIC_BASE_URL}/admin`
-    : 'http://localhost:9000/admin';
+const BASE_URL = 'https://dmbi-server.onrender.com/admin';
 
 const token = getAuth().token;
 
